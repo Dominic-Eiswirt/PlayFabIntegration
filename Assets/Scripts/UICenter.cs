@@ -9,11 +9,9 @@ using UnityEngine;
 //Not all states are created here however, some are created in PlayFabLogin, where the result of a request is received
 public class UICenter : MonoBehaviour
 {    
-    public static UICenter instance;
-    private List<StateReferences> references = new List<StateReferences>();    
-    public List<StateReferences> References { get { return references; } }
+    public static UICenter instance;        
     [Space(5)]   
-    public UIState currentState;
+    public UIState currentState;    
     public bool lobbyCheat = false;
     public bool testInventoryState = true;
     public GameObject inventory;
@@ -29,7 +27,6 @@ public class UICenter : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        references.AddRange(GetComponents<StateReferences>());
         currentState = new LoginState();
         currentState.DisplayState();
     }
@@ -54,28 +51,38 @@ public class UICenter : MonoBehaviour
     {        
         ChangeState(new LoginState());        
     }
-    public void SetInventory()
+    public void ToggleInventory()
     {
         if(currentState.GetType() != typeof(InventoryState))
-        {
-            Debug.Log("Changing to inventorystate");
+        {            
             ChangeState(new InventoryState());
         }
         else
+        {            
+            ChangeState(new LobbyState());
+        }        
+    }
+
+    public void ToggleShop()
+    {
+        if (currentState.GetType() != typeof(ShopState))
         {
-            Debug.Log("Changing to lobbystate");
+            ChangeState(new ShopState());
+        }
+        else
+        {
             ChangeState(new LobbyState());
         }
-        //inventory.SetActive(!inventory.activeSelf);
     }
+
     public void ChangeState(UIState state)
     {
         //We want to disable what the state is doing before changing to a new state so we get a clean template for the UI
-        currentState?.BeforeStateChange();
-        currentState = state;
-        currentState.DisplayState();
-        Debug.Log("Current state: " + currentState.ToString());
+        currentState?.BeforeStateChange();                     
+        currentState = state;        
+        currentState.DisplayState();        
     }
+    
 
     public void SendPlayFabRequestLogin()
     {
@@ -103,9 +110,7 @@ public class UICenter : MonoBehaviour
     }
     IEnumerator WaitForLobby()
     {
-        Debug.Log("in couroutine");
-        yield return new WaitForSeconds(2f);
-        Debug.Log("triggering");
+        yield return new WaitForSeconds(2f);        
         ChangeState(new LobbyState());
     }
 }

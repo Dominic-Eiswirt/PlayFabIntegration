@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 public abstract class UIState
 {
+    protected const string resourcesPath = "Prefabs/StateView/";
     protected UIState()
     {        
         if (canvas == null)

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class CreateAccountInvalidPasswordLengthState : UIState
 {
+    string myPath = "CreateAccountInvalidPasswordView";
     public CreateAccountInvalidPasswordLengthState()
     {
-        referenceObj = Resources.Load("Prefabs/CreateAccountInvalidPasswordView") as GameObject;
+        ResetReference();
     }
 
 
@@ -17,5 +18,10 @@ public class CreateAccountInvalidPasswordLengthState : UIState
     public override void BeforeStateChange()
     {
         GameObject.Destroy(referenceObj);
+        ResetReference();
+    }
+    void ResetReference()
+    {
+        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
     }
 }

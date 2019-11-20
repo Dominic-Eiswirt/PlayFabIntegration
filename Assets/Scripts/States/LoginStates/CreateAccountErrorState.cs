@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class CreateAccountErrorState : UIState
 {
+    string myPath = "CreateAccountErrorView";
     public CreateAccountErrorState()
     {
-        referenceObj = Resources.Load("Prefabs/CreateAccountErrorView") as GameObject;
+        ResetReference();
     }
 
 
@@ -16,6 +17,11 @@ public class CreateAccountErrorState : UIState
     }
     public override void BeforeStateChange()
     {
-        GameObject.Destroy(referenceObj);     
+        GameObject.Destroy(referenceObj);
+        ResetReference();
+    }
+    void ResetReference()
+    {
+        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
     }
 }

@@ -2,10 +2,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 public class LoginState : UIState
-{    
-    public LoginState() 
+{
+    string myPath = "LoginStateView";
+    public LoginState()
     {
-        referenceObj = Resources.Load("Prefabs/LoginStateView") as GameObject;
+        ResetReference();
     }
     public override void DisplayState()
     {
@@ -14,6 +15,11 @@ public class LoginState : UIState
     public override void BeforeStateChange()
     {
         GameObject.Destroy(referenceObj);
+        ResetReference();
+    }
+    void ResetReference()
+    {
+        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
     }
 }
 

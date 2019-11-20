@@ -53,13 +53,10 @@ public class PlayFabLogin : PlayFabFunctions
     }
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        Debug.Log("Result is " + result);
         UICenter.instance.ChangeState(new CreateAccountSuccessState());        
     }
     void OnRegisterFail(PlayFabError error)
-    {
-        Debug.LogError("Error " + error.Error);
-        
+    {   
         if(error.Error == PlayFabErrorCode.EmailAddressNotAvailable)
         {
             email = "";
@@ -92,16 +89,9 @@ public class PlayFabLogin : PlayFabFunctions
         {
             return false;
         }
-    }
-    private void Update()
-    {
-        Debug.Log("Email is " + email);
-        Debug.Log("Password is " +password);
-    }
+    }    
     void OnLoginSuccess(LoginResult result)
-    {
-        //Login part debug message
-        Debug.Log("Result is " + result.LastLoginTime);
+    {        
         UICenter.instance.ChangeState(new LoginSuccessState());
     }   
 
@@ -109,8 +99,7 @@ public class PlayFabLogin : PlayFabFunctions
     {
         //Login failed, could be several reasons, most likely user writing error
         email = "";
-        password = "";
-        Debug.Log("Error " + error);
+        password = "";        
         Debug.Log("User most likely does not exist, display error message from here");
         UICenter.instance.ChangeState(new LoginErrorState());
     }

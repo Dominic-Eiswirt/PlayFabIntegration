@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private WeaponCard weaponCardReference;
+    public WeaponCard weaponCardReference;
+    public Text progressBar;    
     [SerializeField] private Image background;
-    [SerializeField] private Text progressBar;
-    
-    private void Start()
+
+    private void Awake()
     {
         background.sprite = weaponCardReference.cardImage;        
         progressBar.text = string.Format("{0} / {1}", weaponCardReference.progress, weaponCardReference.levelup);

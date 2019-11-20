@@ -3,9 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 public class LoginErrorState : UIState
 {
+    string myPath = "LoginErrorView";
     public LoginErrorState()
     {
-        referenceObj = Resources.Load("Prefabs/LoginErrorView") as GameObject;        
+        ResetReference();
     }
     public override void DisplayState()
     {
@@ -14,7 +15,12 @@ public class LoginErrorState : UIState
     }
     public override void BeforeStateChange()
     {
-        GameObject.Destroy(referenceObj);        
+        GameObject.Destroy(referenceObj);
+        ResetReference();
+    }
+    void ResetReference()
+    {
+        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
     }
 }
 

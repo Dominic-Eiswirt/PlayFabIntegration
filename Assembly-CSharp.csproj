@@ -165,6 +165,7 @@
     <Compile Include="Assets\Scripts\Button Events\PasswordField.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabArgs.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabLogin.cs" />
+    <Compile Include="Assets\Scripts\ShopManager.cs" />
     <Compile Include="Assets\Scripts\StateReferences\CreateAccountInitialReferences.cs" />
     <Compile Include="Assets\Scripts\StateReferences\CreateAccountResultSharedReferences.cs" />
     <Compile Include="Assets\Scripts\StateReferences\InventoryReferences.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Assets\Scripts\States\InventoryStates\InventorySpawner.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\InventoryState.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\States\InventoryStates\ShopState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountAlreadyExistsState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountErrorState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountInitialState.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Assets\Scripts\UICenter.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\WeaponCard.cs" />
+    <Compile Include="Assets\WeaponButtonEvent.cs" />
     <Compile Include="Assets\WeaponIds.cs" />
     <None Include="Assets\PlayFabSdk\link.xml" />
     <Reference Include="Unity.Timeline.Editor">

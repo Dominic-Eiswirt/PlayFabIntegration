@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ButtonEvents : MonoBehaviour
 {    
-    private enum ButtonEvent { None, Login, CreateAccountInitial, LobbyInventory, CreateAccount, Back }
+    private enum ButtonEvent { None, Login, CreateAccountInitial, LobbyInventory, CreateAccount, Back, Shop }
     [SerializeField] private ButtonEvent thisButtonEvent;
 
     public void OnButtonClick()
@@ -12,19 +12,22 @@ public class ButtonEvents : MonoBehaviour
         { 
             case ButtonEvent.Login:
                 UICenter.instance.SendPlayFabRequestLogin();
-            break;
+                break;
             case ButtonEvent.CreateAccountInitial:
                 UICenter.instance.SetCreateState();
-            break;
+                break;
             case ButtonEvent.LobbyInventory:
-                UICenter.instance.SetInventory();
-            break;
+                UICenter.instance.ToggleInventory();
+                break;
             case ButtonEvent.CreateAccount:
                 UICenter.instance.SendPlayFabRequestCreateUser();
-            break;
+                break;
             case ButtonEvent.Back:
                 UICenter.instance.ChangeState(new LoginState());
-            break;
+                break;            
+            case ButtonEvent.Shop:
+                UICenter.instance.ToggleShop();
+                break;            
             default:
             throw new Exception("A button enum was not implemented or set");
         }

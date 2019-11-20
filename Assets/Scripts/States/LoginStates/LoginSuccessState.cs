@@ -3,10 +3,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 public class LoginSuccessState : UIState
-{    
+{
+    string myPath = "LoginSuccessView";
     public LoginSuccessState()
     {
-        referenceObj = Resources.Load("Prefabs/LoginSuccessView") as GameObject;
+        ResetReference();
     }
     public override void DisplayState()
     {
@@ -15,7 +16,12 @@ public class LoginSuccessState : UIState
     }
     public override void BeforeStateChange()
     {     
-        GameObject.Destroy(referenceObj);        
+        GameObject.Destroy(referenceObj);
+        ResetReference();
+    }
+    void ResetReference()
+    {
+        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
     }
 }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   cardImage: {fileID: 21300000, guid: 82068af8d48452f42a8b6aa7d66b55cd, type: 3}
-  cost: 10
   progress: 20
   levelup: 40
+  ID: 1

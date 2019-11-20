@@ -9,4 +9,5 @@ public class WeaponCard : ScriptableObject
     public Sprite cardImage;    
     public int progress;
     public int levelup;
+    public int ID;
 }

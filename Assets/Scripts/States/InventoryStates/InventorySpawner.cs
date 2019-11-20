@@ -57,11 +57,7 @@ public class InventorySpawner : MonoBehaviour
         float whRatio = (width / height);
         Vector3 center = new Vector3(width / 2, height / 2, 0);
         float xOffsetModifier = 1.2f;
-        float yOffsetModifier = 1.2f;
-        Debug.Log(gridSize);
-        Debug.Log(-spriteSize);
-        Debug.Log(whRatio);
-        Debug.Log(xOffsetModifier);
+        float yOffsetModifier = 1.2f;        
         this.transform.position = center;
         this.transform.position += new Vector3(gridSize * -spriteSize / whRatio / xOffsetModifier,   //x
                                                 gridSize * spriteSize / whRatio / yOffsetModifier,  //y
