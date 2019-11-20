@@ -179,6 +179,7 @@
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountAlreadyExistsState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountErrorState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountInitialState.cs" />
+    <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountInvalidPasswordLengthState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountSuccessState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\LobbyState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\LoginErrorState.cs" />

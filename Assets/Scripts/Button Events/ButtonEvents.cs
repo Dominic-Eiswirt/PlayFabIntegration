@@ -23,7 +23,7 @@ public class ButtonEvents : MonoBehaviour
                 UICenter.instance.SendPlayFabRequestCreateUser();
             break;
             case ButtonEvent.Back:
-                UICenter.instance.ChangeState(new LoginState(UICenter.instance));
+                UICenter.instance.ChangeState(new LoginState());
             break;
             default:
             throw new Exception("A button enum was not implemented or set");

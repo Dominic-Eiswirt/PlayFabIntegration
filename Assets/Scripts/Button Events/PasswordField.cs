@@ -7,7 +7,12 @@ public class PasswordField : InputFieldOnEndEdit
 {
     public override void OnEnable()
     {
-        GetComponent<InputField>().textComponent.text = PlayFabLogin.Password;
+        InputField inputField = GetComponent<InputField>();
+        inputField.textComponent.text = PlayFabLogin.Password;
+        if (inputField.textComponent.text.Length > 0)
+        {
+            inputField.text = inputField.textComponent.text;
+        }        
     }
 
     public override void OnEndEdit()

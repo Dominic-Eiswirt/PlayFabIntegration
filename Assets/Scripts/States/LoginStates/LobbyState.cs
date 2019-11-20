@@ -4,39 +4,18 @@ using System.Collections;
 using UnityEngine;
 
 public class LobbyState : UIState
-{
-    private GameObject lobbyStateObj;
-    
-    public LobbyState(UICenter center)
+{    
+    public LobbyState()
     {
-        lobbyStateObj = Resources.Load("Prefabs/LobbyStateView") as GameObject;
-        //this.center = center;
-        //foreach (StateReferences r in this.center.References)
-        //{
-        //    myReferences = r as LobbyReferences;
-        //    if (myReferences != null)
-        //    {
-        //        break;
-        //    }
-        //}
+        referenceObj = Resources.Load("Prefabs/LobbyStateView") as GameObject;
     }
     public override void BeforeStateChange()
     {
-        GameObject.Destroy(lobbyStateObj);
-        //SetAllReferences(false);
+        GameObject.Destroy(referenceObj);
     }
 
     public override void DisplayState()
     {
-        lobbyStateObj = GameObject.Instantiate(lobbyStateObj, canvas.transform);
-        //SetAllReferences(true);
-    }
-
-    void SetAllReferences(bool condition)
-    {
-        foreach (GameObject o in myReferences.GetReferencesOfState)
-        {
-            o.SetActive(condition);
-        }
+        referenceObj = GameObject.Instantiate(referenceObj, canvas.transform);
     }
 }

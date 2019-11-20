@@ -1,14 +1,15 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
-public class CreateAccountAlreadyExistsState : UIState
+using UnityEngine.UI;
+public class CreateAccountInvalidPasswordLengthState : UIState
 {
-    public CreateAccountAlreadyExistsState()
+    public CreateAccountInvalidPasswordLengthState()
     {
-        referenceObj = Resources.Load("Prefabs/CreateAccountAlreadyExistsView") as GameObject;
+        referenceObj = Resources.Load("Prefabs/CreateAccountInvalidPasswordView") as GameObject;
     }
-    
+
+
     public override void DisplayState()
     {
         referenceObj = GameObject.Instantiate(referenceObj, canvas.transform);

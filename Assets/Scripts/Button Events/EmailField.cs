@@ -7,7 +7,13 @@ public class EmailField : InputFieldOnEndEdit
 {
     public override void OnEnable()
     {
-        GetComponent<InputField>().textComponent.text = PlayFabLogin.Email;
+        InputField inputField = GetComponent<InputField>();
+        inputField.textComponent.text = PlayFabLogin.Email;
+        if(inputField.textComponent.text.Length > 0)
+        {
+            inputField.text = inputField.textComponent.text;
+        }
+
     }
 
     public override void OnEndEdit()

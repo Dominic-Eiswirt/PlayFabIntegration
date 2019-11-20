@@ -30,41 +30,41 @@ public class UICenter : MonoBehaviour
             Destroy(this.gameObject);
         }
         references.AddRange(GetComponents<StateReferences>());
-        currentState = new LoginState(this);
+        currentState = new LoginState();
         currentState.DisplayState();
     }
     private void Start()
     {  
         if(lobbyCheat)
         {             
-            ChangeState(new LobbyState(this));
+            ChangeState(new LobbyState());
         }
         if(testInventoryState)
         {
-            ChangeState(new InventoryState(this));
+            ChangeState(new InventoryState());
         }
     }
 
     public void SetCreateState()
     {
-        ChangeState(new CreateAccountInitialState(this));        
+        ChangeState(new CreateAccountInitialState());        
     }
 
     public void SetLoginState()
     {        
-        ChangeState(new LoginState(this));        
+        ChangeState(new LoginState());        
     }
     public void SetInventory()
     {
         if(currentState.GetType() != typeof(InventoryState))
         {
             Debug.Log("Changing to inventorystate");
-            ChangeState(new InventoryState(this));
+            ChangeState(new InventoryState());
         }
         else
         {
             Debug.Log("Changing to lobbystate");
-            ChangeState(new LobbyState(this));
+            ChangeState(new LobbyState());
         }
         //inventory.SetActive(!inventory.activeSelf);
     }
@@ -106,6 +106,6 @@ public class UICenter : MonoBehaviour
         Debug.Log("in couroutine");
         yield return new WaitForSeconds(2f);
         Debug.Log("triggering");
-        ChangeState(new LobbyState(this));
+        ChangeState(new LobbyState());
     }
 }

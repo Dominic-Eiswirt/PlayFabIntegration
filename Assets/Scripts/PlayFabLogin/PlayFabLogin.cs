@@ -9,7 +9,7 @@ using PlayFab.Json;
 
 public class PlayFabLogin : PlayFabFunctions
 {
-    [SerializeField] private static string email = "";    
+    private static string email = "";    
     public static string Email
     {
         get
@@ -17,12 +17,12 @@ public class PlayFabLogin : PlayFabFunctions
             return email;
         }
     }
-    [SerializeField] private static string password = "";
+    private static string password = "";
     public static string Password
     {
         get
         {
-            return Password;
+            return password;
         }
     }
 
@@ -33,8 +33,8 @@ public class PlayFabLogin : PlayFabFunctions
     {
         request = new RegisterPlayFabUserRequest()
         {
-            Password = password,
             Email = email,
+            Password = password,
             RequireBothUsernameAndEmail = false,            
             TitleId = "B8FED"
         };
@@ -54,44 +54,65 @@ public class PlayFabLogin : PlayFabFunctions
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         Debug.Log("Result is " + result);
-        UICenter.instance.ChangeState(new CreateAccountSuccessState(UICenter.instance));        
+        UICenter.instance.ChangeState(new CreateAccountSuccessState());        
     }
     void OnRegisterFail(PlayFabError error)
     {
-        Debug.LogError("Error " + error);
+        Debug.LogError("Error " + error.Error);
+        
         if(error.Error == PlayFabErrorCode.EmailAddressNotAvailable)
         {
-            UICenter.instance.ChangeState(new CreateAccountAlreadyExistsState(UICenter.instance));
-        }
-        else 
-        { 
-            UICenter.instance.ChangeState(new CreateAccountErrorState(UICenter.instance));
             email = "";
             password = "";
+            UICenter.instance.ChangeState(new CreateAccountAlreadyExistsState());
+        }
+        else if(IsEmailValid() && password.Length < 7)
+        {
+            email = "";
+            password = "";
+            UICenter.instance.ChangeState(new CreateAccountInvalidPasswordLengthState());
+        }
+        else
+        { 
+            email = "";
+            password = "";
+            UICenter.instance.ChangeState(new CreateAccountErrorState());
         }
         
     }
 
+    bool IsEmailValid()
+    {
+        try
+        {
+            System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
     private void Update()
     {
-        Debug.Log(email);
-        Debug.Log(password);
+        Debug.Log("Email is " + email);
+        Debug.Log("Password is " +password);
     }
     void OnLoginSuccess(LoginResult result)
     {
         //Login part debug message
         Debug.Log("Result is " + result.LastLoginTime);
-        UICenter.instance.ChangeState(new LoginSuccessState(UICenter.instance));
+        UICenter.instance.ChangeState(new LoginSuccessState());
     }   
 
     void OnLoginFail(PlayFabError error)
     {
         //Login failed, could be several reasons, most likely user writing error
-        Debug.Log("Error " + error);
-        Debug.Log("User most likely does not exist, display error message from here");
-        UICenter.instance.ChangeState(new LoginErrorState(UICenter.instance));
         email = "";
         password = "";
+        Debug.Log("Error " + error);
+        Debug.Log("User most likely does not exist, display error message from here");
+        UICenter.instance.ChangeState(new LoginErrorState());
     }
    
    
