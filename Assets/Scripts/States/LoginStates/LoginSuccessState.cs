@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Collections;
 public class LoginSuccessState : UIState
 {
-    string myPath = "LoginSuccessView";
+    private string myPath = "LoginSuccessView";
     public LoginSuccessState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
     public override void DisplayState()
     {
@@ -17,11 +17,7 @@ public class LoginSuccessState : UIState
     public override void BeforeStateChange()
     {     
         GameObject.Destroy(referenceObj);
-        ResetReference();
-    }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
+        ResetReference(myPath);
     }
 }
 

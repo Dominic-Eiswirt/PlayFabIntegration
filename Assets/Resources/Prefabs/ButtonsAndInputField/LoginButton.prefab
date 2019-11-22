@@ -78,9 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Login
-
-'
+  m_Text: Login
 --- !u!1 &3991879749462932186
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class LobbyState : UIState
 {
-    string myPath = "LobbyStateView";
+    private string myPath = "LobbyStateView";
     public LobbyState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
 
     public override void DisplayState()
@@ -18,10 +18,6 @@ public class LobbyState : UIState
     public override void BeforeStateChange()
     {
         GameObject.Destroy(referenceObj);
-        ResetReference();
-    }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
+        ResetReference(myPath);
     }
 }

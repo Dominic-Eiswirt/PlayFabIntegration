@@ -25,6 +25,7 @@ public class PlayFabLogin : PlayFabFunctions
             return password;
         }
     }
+    public static string thisPlayerId = "";
 
     private RegisterPlayFabUserRequest request;
     private LoginWithEmailAddressRequest login;
@@ -92,7 +93,8 @@ public class PlayFabLogin : PlayFabFunctions
     }    
     void OnLoginSuccess(LoginResult result)
     {        
-        UICenter.instance.ChangeState(new LoginSuccessState());
+        thisPlayerId = result.PlayFabId;
+        UICenter.instance.ChangeState(new LoginSuccessState());        
     }   
 
     void OnLoginFail(PlayFabError error)

@@ -17,6 +17,8 @@ public class UICenter : MonoBehaviour
     public GameObject inventory;
     public Canvas canvas;
     public PlayFabLogin playFab;
+    public CoreGameData data = new CoreGameData();
+    
     private void Awake()
     {
         if(instance == null)
@@ -42,6 +44,10 @@ public class UICenter : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        canvas = GetComponentInParent<Canvas>();
+    }
     public void SetCreateState()
     {
         ChangeState(new CreateAccountInitialState());        
@@ -68,6 +74,18 @@ public class UICenter : MonoBehaviour
         if (currentState.GetType() != typeof(ShopState))
         {
             ChangeState(new ShopState());
+        }
+        else
+        {
+            ChangeState(new LobbyState());
+        }
+    }
+
+    public void ToggleLeaderboard()
+    {
+        if(currentState.GetType() != typeof(LeaderboardState))
+        {
+            ChangeState(new LeaderboardState());
         }
         else
         {
@@ -113,4 +131,10 @@ public class UICenter : MonoBehaviour
         yield return new WaitForSeconds(2f);        
         ChangeState(new LobbyState());
     }
+
+    public void SetNewData(CoreGameData data)
+    {
+        this.data = data;
+    }
+    
 }

@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class ShopState : UIState
 {
-    string myPath = "ShopStateView";
+    private string myPath = "ShopStateView";
     public ShopState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
 
     public override void BeforeStateChange()
@@ -19,9 +19,5 @@ public class ShopState : UIState
     public override void DisplayState()
     {
         referenceObj = GameObject.Instantiate(referenceObj, canvas.transform);
-    }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
     }
 }

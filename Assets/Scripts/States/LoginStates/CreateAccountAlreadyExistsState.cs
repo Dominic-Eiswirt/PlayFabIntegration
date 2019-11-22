@@ -4,10 +4,10 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 public class CreateAccountAlreadyExistsState : UIState
 {
-    string myPath = "CreateAccountAlreadyExistsView";
+    private string myPath = "CreateAccountAlreadyExistsView";
     public CreateAccountAlreadyExistsState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
     
     public override void DisplayState()
@@ -17,10 +17,7 @@ public class CreateAccountAlreadyExistsState : UIState
     public override void BeforeStateChange()
     {
         GameObject.Destroy(referenceObj);
-        ResetReference();
+        ResetReference(myPath);
     }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
-    }
+  
 }

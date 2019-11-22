@@ -17,4 +17,9 @@ public abstract class UIState
 
     //Disable state here before change
     public abstract void BeforeStateChange();
+    protected void ResetReference(string childPath)
+    {
+        //Call this during constructor phase of child objects
+        referenceObj = Resources.Load(resourcesPath + childPath) as GameObject;
+    }
 }

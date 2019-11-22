@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class InventoryState : UIState
 {
-    string myPath = "InventoryStateView";
+    private string myPath = "InventoryStateView";
     public InventoryState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
 
     public override void DisplayState()
@@ -19,10 +19,6 @@ public class InventoryState : UIState
     public override void BeforeStateChange()
     {
         GameObject.Destroy(referenceObj);
-        ResetReference();
-    }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
+        ResetReference(myPath);
     }
 }

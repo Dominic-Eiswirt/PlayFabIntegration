@@ -4,10 +4,10 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 public class CreateAccountSuccessState : UIState
 {    
-    string myPath = "CreateAccountSuccessView";
+    private string myPath = "CreateAccountSuccessView";
     public CreateAccountSuccessState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
 
 
@@ -18,10 +18,6 @@ public class CreateAccountSuccessState : UIState
     public override void BeforeStateChange()
     {     
         GameObject.Destroy(referenceObj);
-        ResetReference();
-    }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
+        ResetReference(myPath);
     }
 }

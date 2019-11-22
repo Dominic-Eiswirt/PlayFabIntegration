@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ButtonEvents : MonoBehaviour
 {    
-    private enum ButtonEvent { None, Login, CreateAccountInitial, LobbyInventory, CreateAccount, Back, Shop }
+    private enum ButtonEvent { None, Login, CreateAccountInitial, LobbyInventory, CreateAccount, Back, Shop, PlayGame, Leaderboard }
     [SerializeField] private ButtonEvent thisButtonEvent;
 
     public void OnButtonClick()
@@ -27,7 +27,13 @@ public class ButtonEvents : MonoBehaviour
                 break;            
             case ButtonEvent.Shop:
                 UICenter.instance.ToggleShop();
-                break;            
+                break;
+            case ButtonEvent.PlayGame:
+                UICenter.instance.ChangeState(new PlayState());
+                break;
+            case ButtonEvent.Leaderboard:
+                UICenter.instance.ToggleLeaderboard();
+                break;
             default:
             throw new Exception("A button enum was not implemented or set");
         }

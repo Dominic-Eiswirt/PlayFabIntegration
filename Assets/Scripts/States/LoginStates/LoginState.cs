@@ -3,10 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 public class LoginState : UIState
 {
-    string myPath = "LoginStateView";
+    private string myPath = "LoginStateView";
     public LoginState()
     {
-        ResetReference();
+        ResetReference(myPath);
     }
     public override void DisplayState()
     {
@@ -15,11 +15,7 @@ public class LoginState : UIState
     public override void BeforeStateChange()
     {
         GameObject.Destroy(referenceObj);
-        ResetReference();
-    }
-    void ResetReference()
-    {
-        referenceObj = Resources.Load(resourcesPath + myPath) as GameObject;
+        ResetReference(myPath);
     }
 }
 
