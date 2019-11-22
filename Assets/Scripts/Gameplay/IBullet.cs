@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface IBullet
 {
+    void TargetModifier(Vector3 targetPos);
     void Init(); 
     
 }

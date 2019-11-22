@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\LeaderboardController.cs" />
+    <Compile Include="Assets\PlayerSpriteController.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminModels.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Assets\Scripts\Button Events\EmailField.cs" />
     <Compile Include="Assets\Scripts\Button Events\InputFieldOnEndEdit.cs" />
     <Compile Include="Assets\Scripts\Button Events\PasswordField.cs" />
+    <Compile Include="Assets\Scripts\ButtonWeaponSelectedGameplay.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Bullet.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBullet.cs" />
@@ -205,6 +207,7 @@
     <Compile Include="Assets\Scripts\WeaponCard.cs" />
     <Compile Include="Assets\Scripts\WeaponIds.cs" />
     <Compile Include="Assets\Scripts\XPDisplay.cs" />
+    <Compile Include="Assets\WeaponsSelector.cs" />
     <None Include="Assets\PlayFabSdk\link.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Tim/Documents/Dom_Docs/PlayfabIntegrationPractice/PlayFabIntegrationTask/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

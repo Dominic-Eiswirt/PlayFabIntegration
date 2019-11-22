@@ -12,7 +12,8 @@ public class CoreGameData
 public class GameplayManager : MonoBehaviour
 {
     public static GameplayManager instance;
-    
+    public delegate void DamageWasTaken();
+    public event DamageWasTaken OnDamageEvent;
     public int playerHealth = 5;
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -31,6 +32,7 @@ public class GameplayManager : MonoBehaviour
     private ObjectPooler enemyBulletPooler;    
     private float waveTimer = 2;
     private float gameTimer = 30;
+    
 
     
     private void Awake()
@@ -86,14 +88,22 @@ public class GameplayManager : MonoBehaviour
     {
         playerBulletPooler.SpawnItem(position);
     }
-    
+
+    public void SpawnPlayerBullet(Vector3 position, Vector3 modifier)
+    {
+        playerBulletPooler.SpawnItem(position, modifier);
+    }
+
     public void SpawnEnemyBullet(Vector3 position)
     {
         enemyBulletPooler.SpawnItem(position);
     }
 
+    
+
     public void RegisterHit()
     {
         playerHealth--;
+        OnDamageEvent.Invoke();
     }    
 }

@@ -9,15 +9,14 @@ using System.Text;
 public class LeaderboardController : MonoBehaviour
 {
     [SerializeField] private GameObject sampleTextObject;
+    [SerializeField] private GameObject toggleButton;
+    [SerializeField] private GameObject loadingText;
     private StringBuilder sb = new StringBuilder();
     
     void Start()
     {
-        //InstantiatePlayerText("DOM", "50");
-        //InstantiatePlayerText("LEO", "40");
-        //InstantiatePlayerText("YULS", "30");
-        //InstantiatePlayerText("NIKO", "20");
-        //InstantiatePlayerText("GAB", "10");
+        loadingText.SetActive(true);
+        toggleButton.SetActive(false);
         GetLeaderBoard();
     }
 
@@ -29,13 +28,17 @@ public class LeaderboardController : MonoBehaviour
     }
     private void OnLeaderboardSuccess(GetLeaderboardResult result)
     {
-        foreach(PlayerLeaderboardEntry player in result.Leaderboard)
+        toggleButton.SetActive(true);
+        loadingText.SetActive(false);
+        foreach (PlayerLeaderboardEntry player in result.Leaderboard)
         {            
             InstantiatePlayerText((player.Position+1).ToString(), player.PlayFabId, player.StatValue.ToString());
         }
     }
     private void OnLeaderboardFailure(PlayFabError error)
     {
+        loadingText.SetActive(false);
+        toggleButton.SetActive(true);
         Debug.Log(error.GenerateErrorReport());
     }
 

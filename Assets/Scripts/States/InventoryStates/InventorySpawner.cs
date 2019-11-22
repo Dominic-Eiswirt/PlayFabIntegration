@@ -14,7 +14,7 @@ public class InventorySpawner : MonoBehaviour
     private PlayerInventory playerInventory;
     public bool useDynamicGrid = true; //Grid that depends on the amount of the object we are instantiating
     public GameObject loadingText;
-
+    public Button selectionButtonPrefab;
     private void OnEnable()
     {
         loadingText.SetActive(true);
@@ -44,10 +44,15 @@ public class InventorySpawner : MonoBehaviour
         gridLayout.cellSize = new Vector2(spriteSize, spriteSize);
         Text childText = null;
         int i = 0;
-        Debug.Log("Spawnlist count " + spawnList.Count);
+        
+        GameObject newGo;
+        Button newButton;
         foreach(GameObject o in spawnList)
         {
-            childText = Instantiate(o, this.transform).GetComponentInChildren<Text>();
+            newGo = Instantiate(o, this.transform);
+            childText = newGo.GetComponentInChildren<Text>();
+            newButton = Instantiate(selectionButtonPrefab, newGo.transform);
+            newButton.GetComponent<ButtonWeaponSelectedGameplay>().myType = newGo.GetComponent<Weapon>().myType;
             childText.fontSize = (int)spriteSize / 5;
             i++;
         }

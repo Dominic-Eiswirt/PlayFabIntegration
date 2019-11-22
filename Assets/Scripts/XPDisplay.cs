@@ -32,8 +32,14 @@ public class XPDisplay : MonoBehaviour
          CloudExecuteError => 
          {
              GetComponent<Text>().text = "";
-             Debug.Log("Error executing cloud script");
-         });
+             Debug.LogError("Error executing cloud script");
+            foreach (GameObject o in buttons)
+            {
+                o.SetActive(true);
+            }
+             transform.GetChild(0).GetComponent<Text>().text = "Error.";
+             transform.GetChild(0).GetComponent<Text>().color = Color.red;
+         });        
     }
 
     private void OnCloudUpdatePlayerStats(ExecuteCloudScriptResult result)
@@ -54,6 +60,7 @@ public class XPDisplay : MonoBehaviour
         {             
             o.SetActive(true);
         }
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
 }

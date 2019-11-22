@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class ObjectPooler
 {
-    private List<GameObject> objectList = new List<GameObject>();    
-    //Queue<GameObject> objectQueue = new Queue<GameObject>();
-   
+    private List<GameObject> objectList = new List<GameObject>();        
+    
     public void CreatePool(GameObject objectToCreate, int count)
     {
         int originalListCount = objectList.Count;
@@ -29,7 +28,8 @@ public class ObjectPooler
                 spawnedItem = true;
                 objectList[i].transform.position = position;
                 objectList[i].SetActive(true);
-                objectList[i].GetComponent<IBullet>().Init();
+                objectList[i].GetComponent<IBullet>().TargetModifier(Vector3.zero);
+                objectList[i].GetComponent<IBullet>().Init();                
                 break;
             }
         }
@@ -41,6 +41,31 @@ public class ObjectPooler
         }
     }
 
+    public void SpawnItem(Vector3 position, Vector3 targetModifier)
+    {
+        bool spawnedItem = false;
+        for (int i = 0; i < objectList.Count; i++)
+        {
+            if (!objectList[i].activeSelf)
+            {
+                spawnedItem = true;
+                objectList[i].transform.position = position;
+                objectList[i].SetActive(true);
+                Debug.Log(targetModifier);
+                Debug.Log(position);
+                Debug.Log(position+targetModifier);
+                objectList[i].GetComponent<IBullet>().TargetModifier(targetModifier);
+                objectList[i].GetComponent<IBullet>().Init();
+                break;
+            }
+        }
+        if (!spawnedItem && objectList.Count > 0) //all our game objs are currently alive and active, we need more
+        {
+            CreatePool(objectList[0], 3);
+            //try again
+            SpawnItem(position);
+        }
+    }
     public void NukePool()
     {
         foreach(GameObject o in objectList)

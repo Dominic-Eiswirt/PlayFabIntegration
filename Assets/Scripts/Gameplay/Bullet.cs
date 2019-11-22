@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour, IBullet
 {
+    protected Vector3 modifiedTarget = Vector3.zero;
     protected void Update()
     {
         OutOfBoundsControl();
@@ -17,6 +18,11 @@ public abstract class Bullet : MonoBehaviour, IBullet
         }
     }
 
-    public abstract void Init();
+    public abstract void Init();    
+
+    public void TargetModifier(Vector3 targetPos)
+    {
+        modifiedTarget = targetPos;        
+    }
 }
     

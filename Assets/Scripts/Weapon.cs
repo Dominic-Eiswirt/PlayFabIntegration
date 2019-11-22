@@ -9,12 +9,12 @@ public class Weapon : MonoBehaviour
     public Text weaponPriceText;    
     public Text headText;
     [SerializeField] private Image background;
-
+    public WeaponSelectedEnum myType;
+    
     private void Awake()
     {
         background.sprite = weaponCardReference.cardImage;
         weaponPriceText.text = "";
     }
-
 }
 

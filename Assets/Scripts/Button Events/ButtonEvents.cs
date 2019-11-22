@@ -34,6 +34,7 @@ public class ButtonEvents : MonoBehaviour
             case ButtonEvent.Leaderboard:
                 UICenter.instance.ToggleLeaderboard();
                 break;
+            
             default:
             throw new Exception("A button enum was not implemented or set");
         }

@@ -9,6 +9,8 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;
     public GameObject gridChild;
+    public GameObject toggleButton;
+    public GameObject loadingText;
     private const string catalogueName = "Weapons";
     private const string storeName = "GunShop";
     [SerializeField] private Text purchaseResultDisplay;
@@ -20,6 +22,8 @@ public class ShopManager : MonoBehaviour
     {
         if(instance == null)
         {
+            loadingText.SetActive(true);
+            toggleButton.SetActive(false);
             instance = this;
         }
         else
@@ -82,6 +86,8 @@ public class ShopManager : MonoBehaviour
 
     private void OnGetShopFail(PlayFabError error)
     {
+        loadingText.SetActive(false);
+        toggleButton.SetActive(true);
         Debug.LogWarning("Store failure");
         Debug.LogWarning(error.ErrorDetails);
     }
@@ -109,6 +115,8 @@ public class ShopManager : MonoBehaviour
                 Debug.LogError("The weapon catalogue has more gameobjects than what is available here, make sure you've added all gameobjects");
             }
         }
+        toggleButton.SetActive(true);
+        loadingText.SetActive(false);
     }
 
     public void RequestPurchase(int weaponID)
