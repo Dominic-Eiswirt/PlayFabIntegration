@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 481329785311055616}
   - component: {fileID: 2017072312785290194}
   - component: {fileID: 1673184109062568509}
+  - component: {fileID: 7253420697863856298}
   m_Layer: 0
   m_Name: ShopText
   m_TagString: Untagged
@@ -93,8 +94,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectDistance: {x: 3.11, y: 3.99}
   m_UseGraphicAlpha: 1
+--- !u!114 &7253420697863856298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022007691257829289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc90e1d74d9e134db253a0a33db4d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  from: {r: 0.057249546, g: 0, b: 1, a: 1}
+  to: {r: 0, g: 1, b: 0.21416616, a: 1}
+  outline: {fileID: 1673184109062568509}
 --- !u!1 &3280246649811532810
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +173,7 @@ GameObject:
   - component: {fileID: 2312747316677443235}
   - component: {fileID: 3378294008137978062}
   - component: {fileID: 4117081620800471178}
+  - component: {fileID: 3143114220317129120}
   m_Layer: 0
   m_Name: PlayerCash
   m_TagString: Untagged
@@ -180,7 +197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.14139313, y: 0.33519924}
   m_AnchorMax: {x: 0.14139313, y: 0.33519924}
-  m_AnchoredPosition: {x: 2.8999996, y: -0.07500076}
+  m_AnchoredPosition: {x: 2.9000244, y: -0.07499695}
   m_SizeDelta: {x: 549.5, y: 86.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2312747316677443235
@@ -204,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8004193, b: 0.4481132, a: 1}
+  m_Color: {r: 1, g: 0.6946006, b: 0.15566039, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -224,7 +241,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Domi-Cash Available: '
+  m_Text: 
 --- !u!114 &4117081620800471178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,9 +254,24 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectColor: {r: 1, g: 0.18823531, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &3143114220317129120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3301375497007669017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc90e1d74d9e134db253a0a33db4d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  from: {r: 0.057249546, g: 0, b: 1, a: 1}
+  to: {r: 0, g: 1, b: 0.21416616, a: 1}
+  outline: {fileID: 4117081620800471178}
 --- !u!1 &5437082345581926397
 GameObject:
   m_ObjectHideFlags: 0

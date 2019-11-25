@@ -10,8 +10,7 @@ public class ShopManager : MonoBehaviour
     public static ShopManager instance;
     public GameObject gridChild;
     public GameObject toggleButton;
-    public GameObject loadingText;
-
+    public GameObject loadingText;    
     private const string catalogueName = "Weapons";
     private const string storeName = "GunShop";
     [SerializeField] private Text purchaseResultDisplay;
@@ -20,7 +19,7 @@ public class ShopManager : MonoBehaviour
     private Weapon[] allWeaponsScript;
     private List<int> weaponPrices = new List<int>();
     private int? indexOfWeapon;
-
+    int currentMoney;
     void OnEnable()
     {
         if(instance == null)
@@ -97,7 +96,7 @@ public class ShopManager : MonoBehaviour
     }
 
     private void OnGetShopSuccess(GetStoreItemsResult result)
-    {
+    {        
         GameObject temp;
         Weapon tempWeapon;
         foreach(StoreItem item in result.Store)
@@ -125,6 +124,7 @@ public class ShopManager : MonoBehaviour
 
     public void RequestPurchase(int weaponID)
     {
+        PrematureTextEdit(weaponID);
         //Gets called when a weapon button is clicked
         PurchaseItemRequest request = new PurchaseItemRequest
         {
@@ -140,7 +140,8 @@ public class ShopManager : MonoBehaviour
             error =>
         { 
             Debug.Log("Error");
-            StartCoroutine(DisplayTextWithColor("Purchase Failed. Do you have enough money?", Color.red));            
+            StartCoroutine(DisplayTextWithColor("Purchase Failed. Do you have enough money?", Color.red));
+            ResetTextOnFailure();
         });
         
     }
@@ -154,14 +155,22 @@ public class ShopManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         purchaseResultDisplay.text = "";
     }
-
+    private void PrematureTextEdit(int weaponId)
+    {
+        playerCashDisplay.text = "Your Domi-Cash: " + (currentMoney - weaponPrices[weaponId]).ToString();
+    }
+    private void ResetTextOnFailure()
+    {
+        playerCashDisplay.text = "Your Domi-Cash: " + currentMoney.ToString();
+    }
     private void GetPlayerCash()
     {
         GetUserInventoryRequest request = new GetUserInventoryRequest();
 
         PlayFabClientAPI.GetUserInventory(request, resultCallback =>
         {
-            playerCashDisplay.text = "Your Domi-Cash: " + resultCallback.VirtualCurrency["DC"].ToString();
+            currentMoney = resultCallback.VirtualCurrency["DC"];
+            playerCashDisplay.text = "Your Domi-Cash: " + currentMoney.ToString();
         },
         errorCallback =>
         {

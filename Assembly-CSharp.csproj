@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FailedToStartGameMessage.cs" />
+    <Compile Include="Assets\OutlineColorLerp.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminModels.cs" />
