@@ -14,7 +14,7 @@ public class ButtonEvents : MonoBehaviour
                 UICenter.instance.SendPlayFabRequestLogin();
                 break;
             case ButtonEvent.CreateAccountInitial:
-                UICenter.instance.SetCreateState();
+                UICenter.instance.ChangeState(new CreateAccountInitialState());
                 break;
             case ButtonEvent.LobbyInventory:
                 UICenter.instance.ToggleInventory();
@@ -29,7 +29,7 @@ public class ButtonEvents : MonoBehaviour
                 UICenter.instance.ToggleShop();
                 break;
             case ButtonEvent.PlayGame:
-                UICenter.instance.ChangeState(new PlayState());
+                CurrentWeaponLoadout.instance.AdjustPlayfabInventory();                
                 break;
             case ButtonEvent.Leaderboard:
                 UICenter.instance.ToggleLeaderboard();

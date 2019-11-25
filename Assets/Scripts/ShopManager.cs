@@ -11,13 +11,16 @@ public class ShopManager : MonoBehaviour
     public GameObject gridChild;
     public GameObject toggleButton;
     public GameObject loadingText;
+
     private const string catalogueName = "Weapons";
     private const string storeName = "GunShop";
     [SerializeField] private Text purchaseResultDisplay;
+    [SerializeField] private Text playerCashDisplay;
     [SerializeField] private GameObject[] allWeapons;
     private Weapon[] allWeaponsScript;
     private List<int> weaponPrices = new List<int>();
     private int? indexOfWeapon;
+
     void OnEnable()
     {
         if(instance == null)
@@ -33,6 +36,7 @@ public class ShopManager : MonoBehaviour
         GetWeaponScripts();
         SortArray();
         GetStore();
+        GetPlayerCash();
     }
 
     private void GetWeaponScripts()
@@ -131,24 +135,37 @@ public class ShopManager : MonoBehaviour
         PlayFabClientAPI.PurchaseItem(request, resultCallback =>
         {
             Debug.Log("Success");
-            StartCoroutine(DisplayTextWithColor("Purchase Successful", Color.green));
-            //purchaseResultDisplay.text = "Purchase Successful";
-            //purchaseResultDisplay.color = Color.green;
+            StartCoroutine(DisplayTextWithColor("Purchase Successful", Color.green));            
         },
             error =>
         { 
             Debug.Log("Error");
-            StartCoroutine(DisplayTextWithColor("Purchase Failed. Do you have enough money?", Color.red));
-            //purchaseResultDisplay.text = "Purchase Failed. Do you have enough money?";
-            //purchaseResultDisplay.color = Color.red;
+            StartCoroutine(DisplayTextWithColor("Purchase Failed. Do you have enough money?", Color.red));            
         });
+        
     }
 
     private IEnumerator DisplayTextWithColor(string s, Color col)
     {
         purchaseResultDisplay.text = s;
         purchaseResultDisplay.color = col;
-        yield return new WaitForSeconds(0.75f);
+        // Get cash only after the transaction result is in. Need to make sure that the value does not get changed while we are requesting
+        GetPlayerCash(); 
+        yield return new WaitForSeconds(1f);
         purchaseResultDisplay.text = "";
+    }
+
+    private void GetPlayerCash()
+    {
+        GetUserInventoryRequest request = new GetUserInventoryRequest();
+
+        PlayFabClientAPI.GetUserInventory(request, resultCallback =>
+        {
+            playerCashDisplay.text = "Your Domi-Cash: " + resultCallback.VirtualCurrency["DC"].ToString();
+        },
+        errorCallback =>
+        {
+            Debug.Log("Error Message: " + errorCallback.ErrorDetails);
+        });
     }
 }

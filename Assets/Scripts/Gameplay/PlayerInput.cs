@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour
     public GameplayManager manager;
     public float speed = 0.5f;
     public Vector3 mouseTarget;
-    float modifier = 40;
+    private float modifier = 40;
     
     private void Awake()
     {
@@ -21,8 +21,8 @@ public class PlayerInput : MonoBehaviour
             Destroy(this);
         }
     }
- 
-    void Update()
+
+    private void Update()
     {
         if(Input.GetKey(KeyCode.W) && this.transform.position.y < 60)
         {
@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
         {            
             mouseTarget = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));            
             manager.SpawnPlayerBullet(PlayerInput.instance.gameObject.transform.position);
-            if (WeaponsSelector.instance.selectedWeapon == WeaponSelectedEnum.Shotgun)
+            if (CurrentWeaponLoadout.instance.selectedWeapon.myType == WeaponSelectedEnum.Shotgun)
             {
 
                 GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),

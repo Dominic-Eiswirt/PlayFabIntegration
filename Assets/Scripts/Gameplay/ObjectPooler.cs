@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class ObjectPooler
 {
-    private List<GameObject> objectList = new List<GameObject>();        
+    private List<GameObject> objectList = new List<GameObject>();
     
+
     public void CreatePool(GameObject objectToCreate, int count)
     {
         int originalListCount = objectList.Count;
@@ -18,52 +19,30 @@ public class ObjectPooler
         }
     }
 
-    public void SpawnItem(Vector3 position)
-    {
-        bool spawnedItem = false;
-        for(int i = 0; i < objectList.Count; i++)
-        {
-            if(!objectList[i].activeSelf)
-            {
-                spawnedItem = true;
-                objectList[i].transform.position = position;
-                objectList[i].SetActive(true);
-                objectList[i].GetComponent<IBullet>().TargetModifier(Vector3.zero);
-                objectList[i].GetComponent<IBullet>().Init();                
-                break;
-            }
-        }
-        if(!spawnedItem && objectList.Count > 0) //all our game objs are currently alive and active, we need more
-        {
-            CreatePool(objectList[0], 3);
-            //try again
-            SpawnItem(position);
-        }
-    }
-
-    public void SpawnItem(Vector3 position, Vector3 targetModifier)
-    {
+    //Spawn item gets the location of the enemy or player, or whever it should start.
+    //Also give a optional target modifier (used for the shotgun to randomize the bullets)
+    public void SpawnItem(Vector3 startPosition, Vector3 targetModifier = default(Vector3))
+    {        
         bool spawnedItem = false;
         for (int i = 0; i < objectList.Count; i++)
         {
             if (!objectList[i].activeSelf)
             {
                 spawnedItem = true;
-                objectList[i].transform.position = position;
+                objectList[i].transform.position = startPosition;
                 objectList[i].SetActive(true);
-                Debug.Log(targetModifier);
-                Debug.Log(position);
-                Debug.Log(position+targetModifier);
-                objectList[i].GetComponent<IBullet>().TargetModifier(targetModifier);
+                objectList[i].GetComponent<IBullet>().TargetModifier((Vector3)targetModifier);
                 objectList[i].GetComponent<IBullet>().Init();
                 break;
             }
         }
-        if (!spawnedItem && objectList.Count > 0) //all our game objs are currently alive and active, we need more
+
+        //all our game objs are currently alive and active, we need to expand the pool
+        if (!spawnedItem && objectList.Count > 0) 
         {
             CreatePool(objectList[0], 3);
             //try again
-            SpawnItem(position);
+            SpawnItem(startPosition);
         }
     }
     public void NukePool()

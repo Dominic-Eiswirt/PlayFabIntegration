@@ -6,9 +6,10 @@ using PlayFab.ClientModels;
 using PlayFab;
 public class PlayFabInventory : MonoBehaviour
 {
-    GetUserInventoryRequest request;
     public GetUserInventoryResult result;
     public GameObject toggleButton;
+    private GetUserInventoryRequest request;
+
     void OnEnable()
     {
         toggleButton.SetActive(false);
@@ -16,23 +17,19 @@ public class PlayFabInventory : MonoBehaviour
     }
 
     public void RequestGetPlayerInventory()
-    {
+    {                
         request = new GetUserInventoryRequest();                
-        
-
         PlayFabClientAPI.GetUserInventory(request, InventoryResult, OnError);
     }
 
-    void InventoryResult(GetUserInventoryResult result)
+    private void InventoryResult(GetUserInventoryResult result)
     {
-        Debug.Log("Inventory result count is " + result.Inventory.Count);        
-
         this.result = result;
         GetComponent<PlayerInventory>().SetInventoryPlayFab(result);
         toggleButton.SetActive(true);
     }
 
-    void OnError(PlayFabError e)
+    private void OnError(PlayFabError e)
     {
         toggleButton.SetActive(true);
         Debug.Log(e);

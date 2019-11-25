@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class CoreGameData
 {
     public int score;
@@ -20,24 +19,24 @@ public class GameplayManager : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject playerBullet;
     public GameObject[] enemySpawnLocations;
-    public CoreGameData coreGameData = new CoreGameData 
-    { 
+    public CoreGameData coreGameData = new CoreGameData
+    {
         score = 0
     };
     public int enemysPerWave = 3;
     public Text gameTimerText;
     public Text scoreText;
-    
+
     private ObjectPooler playerBulletPooler;
-    private ObjectPooler enemyBulletPooler;    
+    private ObjectPooler enemyBulletPooler;
     private float waveTimer = 2;
     private float gameTimer = 30;
-    
 
-    
+
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -61,22 +60,22 @@ public class GameplayManager : MonoBehaviour
         gameTimer -= Time.deltaTime;
         gameTimerText.text = "Time:" + gameTimer.ToString("F1");
         scoreText.text = "Kills: " + coreGameData.score.ToString();
-        
+
         waveTimer += Time.deltaTime;
-        if(waveTimer >= 3)
+        if (waveTimer >= 3)
         {
-            for(int i = 0; i < enemysPerWave; i++)
-            { 
-                Instantiate(enemyPrefab, 
-                            enemySpawnLocations[Random.Range(0, enemySpawnLocations.Length-1)].transform.position, 
-                            enemyPrefab.transform.rotation, 
+            for (int i = 0; i < enemysPerWave; i++)
+            {
+                Instantiate(enemyPrefab,
+                            enemySpawnLocations[Random.Range(0, enemySpawnLocations.Length - 1)].transform.position,
+                            enemyPrefab.transform.rotation,
                             gameObject.transform);
             }
             waveTimer = 0;
         }
 
-        if(gameTimer <= 0 || playerHealth <= 0)
-        {
+        if (gameTimer <= 0 || playerHealth <= 0)
+        {            
             enemyBulletPooler.NukePool();
             playerBulletPooler.NukePool();
             Destroy(PlayerInput.instance.gameObject);
@@ -84,12 +83,8 @@ public class GameplayManager : MonoBehaviour
             UICenter.instance.ChangeState(new LobbyState());
         }
     }
-    public void SpawnPlayerBullet(Vector3 position)
-    {
-        playerBulletPooler.SpawnItem(position);
-    }
 
-    public void SpawnPlayerBullet(Vector3 position, Vector3 modifier)
+    public void SpawnPlayerBullet(Vector3 position, Vector3 modifier = default(Vector3))
     {
         playerBulletPooler.SpawnItem(position, modifier);
     }
@@ -99,11 +94,10 @@ public class GameplayManager : MonoBehaviour
         enemyBulletPooler.SpawnItem(position);
     }
 
-    
-
     public void RegisterHit()
     {
         playerHealth--;
         OnDamageEvent.Invoke();
-    }    
+    }
+        
 }

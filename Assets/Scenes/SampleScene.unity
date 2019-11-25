@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 151540960}
   - component: {fileID: 151540961}
   m_Layer: 5
-  m_Name: WeaponsSelector
+  m_Name: CurrentWeaponLoadout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyCheat: 0
   testInventoryState: 0
-  inventory: {fileID: 0}
   canvas: {fileID: 1370906763}
   playFab: {fileID: 708735467}
 --- !u!114 &598857995

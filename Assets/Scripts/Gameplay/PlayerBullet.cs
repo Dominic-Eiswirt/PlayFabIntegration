@@ -14,10 +14,7 @@ public class PlayerBullet : Bullet
     }
     public override void Init()
     {   
-        
-        bulletDirection = ((PlayerInput.instance.mouseTarget + modifiedTarget) - this.transform.position).normalized;
-        
-       
+        bulletDirection = ((PlayerInput.instance.mouseTarget + modifiedTarget) - this.transform.position).normalized;  
     }
 
 

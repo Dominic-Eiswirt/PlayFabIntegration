@@ -63,10 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CanvasCameraGet.cs" />
-    <Compile Include="Assets\LeaderboardController.cs" />
-    <Compile Include="Assets\PlayerHealthDisplay.cs" />
-    <Compile Include="Assets\PlayerSpriteController.cs" />
+    <Compile Include="Assets\FailedToStartGameMessage.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminModels.cs" />
@@ -165,7 +162,8 @@
     <Compile Include="Assets\Scripts\Button Events\EmailField.cs" />
     <Compile Include="Assets\Scripts\Button Events\InputFieldOnEndEdit.cs" />
     <Compile Include="Assets\Scripts\Button Events\PasswordField.cs" />
-    <Compile Include="Assets\Scripts\ButtonWeaponSelectedGameplay.cs" />
+    <Compile Include="Assets\Scripts\CanvasCameraGet.cs" />
+    <Compile Include="Assets\Scripts\CurrentWeaponLoadout.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Bullet.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBullet.cs" />
@@ -174,8 +172,13 @@
     <Compile Include="Assets\Scripts\Gameplay\ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\Gameplay\PlayerBullet.cs" />
     <Compile Include="Assets\Scripts\Gameplay\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\LeaderboardController.cs" />
     <Compile Include="Assets\Scripts\LockInspectorHotkey.cs" />
+    <Compile Include="Assets\Scripts\PlayerHealthDisplay.cs" />
+    <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\PlayerSpriteController.cs" />
     <Compile Include="Assets\Scripts\PlayFabInventory.cs" />
+    <Compile Include="Assets\Scripts\PlayfabLobbyXPDisplay.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabArgs.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabLogin.cs" />
     <Compile Include="Assets\Scripts\ShopManager.cs" />
@@ -189,7 +192,6 @@
     <Compile Include="Assets\Scripts\StateReferences\StateReferences.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\InventorySpawner.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\InventoryState.cs" />
-    <Compile Include="Assets\Scripts\States\InventoryStates\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\ShopState.cs" />
     <Compile Include="Assets\Scripts\States\LeaderboardState.cs" />
     <Compile Include="Assets\Scripts\States\LoginStates\CreateAccountAlreadyExistsState.cs" />
@@ -208,8 +210,7 @@
     <Compile Include="Assets\Scripts\WeaponButtonEvent.cs" />
     <Compile Include="Assets\Scripts\WeaponCard.cs" />
     <Compile Include="Assets\Scripts\WeaponIds.cs" />
-    <Compile Include="Assets\Scripts\XPDisplay.cs" />
-    <Compile Include="Assets\WeaponsSelector.cs" />
+    <Compile Include="Assets\Scripts\WeaponInventorySelection.cs" />
     <None Include="Assets\PlayFabSdk\link.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Tim/Documents/Dom_Docs/PlayfabIntegrationPractice/PlayFabIntegrationTask/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

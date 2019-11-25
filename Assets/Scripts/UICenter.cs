@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using PlayFab;
+using PlayFab.ClientModels;
 
 
 //Serves as a reference container as well as a link for creating/keeping track of current states.
 //Not all states are created here however, some are created in PlayFabLogin, where the result of a request is received
 public class UICenter : MonoBehaviour
-{    
-    public static UICenter instance;        
-    [Space(5)]   
-    public UIState currentState;    
+{
+    public static UICenter instance;
+    [Space(5)]
+    public UIState currentState;
     public bool lobbyCheat = false;
     public bool testInventoryState = true;
-    public GameObject inventory;
     public Canvas canvas;
     public PlayFabLogin playFab;
     public CoreGameData data = new CoreGameData();
-    
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -32,13 +33,14 @@ public class UICenter : MonoBehaviour
         currentState = new LoginState();
         currentState.DisplayState();
     }
+
     private void Start()
-    {  
-        if(lobbyCheat)
-        {             
+    {
+        if (lobbyCheat)
+        {
             ChangeState(new LobbyState());
         }
-        if(testInventoryState)
+        if (testInventoryState)
         {
             ChangeState(new InventoryState());
         }
@@ -48,25 +50,28 @@ public class UICenter : MonoBehaviour
     {
         canvas = GetComponentInParent<Canvas>();
     }
-    public void SetCreateState()
+
+    //Important function used for changing states.
+    public void ChangeState(UIState state)
     {
-        ChangeState(new CreateAccountInitialState());        
+        //We want to disable what the state is doing before changing to a new state so we get a clean template for the UI
+        currentState?.BeforeStateChange();
+        currentState = state;
+        currentState.DisplayState();
     }
 
-    public void SetLoginState()
-    {        
-        ChangeState(new LoginState());        
-    }
+
+    #region Toggle Function
     public void ToggleInventory()
     {
-        if(currentState.GetType() != typeof(InventoryState))
-        {            
+        if (currentState.GetType() != typeof(InventoryState))
+        {
             ChangeState(new InventoryState());
         }
         else
-        {            
+        {
             ChangeState(new LobbyState());
-        }        
+        }
     }
 
     public void ToggleShop()
@@ -80,10 +85,11 @@ public class UICenter : MonoBehaviour
             ChangeState(new LobbyState());
         }
     }
+    #endregion
 
     public void ToggleLeaderboard()
     {
-        if(currentState.GetType() != typeof(LeaderboardState))
+        if (currentState.GetType() != typeof(LeaderboardState))
         {
             ChangeState(new LeaderboardState());
         }
@@ -93,14 +99,7 @@ public class UICenter : MonoBehaviour
         }
     }
 
-    public void ChangeState(UIState state)
-    {
-        //We want to disable what the state is doing before changing to a new state so we get a clean template for the UI
-        currentState?.BeforeStateChange();                     
-        currentState = state;        
-        currentState.DisplayState();        
-    }
-    
+
 
     public void SendPlayFabRequestLogin()
     {
@@ -126,15 +125,37 @@ public class UICenter : MonoBehaviour
     {
         StartCoroutine(WaitForLobby());
     }
-    IEnumerator WaitForLobby()
+    private IEnumerator WaitForLobby()
     {
-        yield return new WaitForSeconds(2f);        
+        yield return new WaitForSeconds(2f);
         ChangeState(new LobbyState());
     }
 
     public void SetNewData(CoreGameData data)
     {
         this.data = data;
+        UpdatePlayfabVirtualCurrency();
+
+
     }
-    
+    private void UpdatePlayfabVirtualCurrency()
+    {
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "updateVirtualCurrency",
+            FunctionParameter = new { Kills = UICenter.instance.data.score },
+            GeneratePlayStreamEvent = true,
+
+        },
+        ResultCallback =>
+        {
+            Debug.Log("Executed script for adding virtual currency");
+        }
+        ,
+        CloudExecuteError =>
+        {
+            Debug.Log("Virtual currency addition failed");
+        });
+    }
+
 }

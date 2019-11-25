@@ -52,7 +52,7 @@ public class InventorySpawner : MonoBehaviour
             newGo = Instantiate(o, this.transform);
             childText = newGo.GetComponentInChildren<Text>();
             newButton = Instantiate(selectionButtonPrefab, newGo.transform);
-            newButton.GetComponent<ButtonWeaponSelectedGameplay>().myType = newGo.GetComponent<Weapon>().myType;
+            newButton.GetComponent<WeaponInventorySelection>().myType = newGo.GetComponent<Weapon>().myType;
             childText.fontSize = (int)spriteSize / 5;
             i++;
         }
