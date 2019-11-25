@@ -21,6 +21,7 @@ public class PlayerInput : MonoBehaviour
             Destroy(this);
         }
     }
+ 
     void Update()
     {
         if(Input.GetKey(KeyCode.W) && this.transform.position.y < 60)
@@ -56,4 +57,5 @@ public class PlayerInput : MonoBehaviour
             }
         }
     }
+
 }
