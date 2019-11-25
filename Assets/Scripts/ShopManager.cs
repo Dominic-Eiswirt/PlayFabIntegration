@@ -107,7 +107,7 @@ public class ShopManager : MonoBehaviour
                 temp = Instantiate(allWeapons[(int)indexOfWeapon], gridChild.transform);
                 tempWeapon = temp.GetComponent<Weapon>();
                 weaponPrices.Add((int)item.VirtualCurrencyPrices["DC"]);
-                tempWeapon.weaponPriceText.text = "Domi-Cash: " + item.VirtualCurrencyPrices["DC"].ToString();
+                tempWeapon.weaponPriceText.text = "Doominic-Cash: " + item.VirtualCurrencyPrices["DC"].ToString();
                 tempWeapon.headText.gameObject.SetActive(true);
                 tempWeapon.headText.text = item.ItemId;
                 temp.GetComponent<Button>().enabled = true;
@@ -157,11 +157,11 @@ public class ShopManager : MonoBehaviour
     }
     private void PrematureTextEdit(int weaponId)
     {
-        playerCashDisplay.text = "Your Domi-Cash: " + (currentMoney - weaponPrices[weaponId]).ToString();
+        playerCashDisplay.text = "Doominic-Cash: " + (currentMoney - weaponPrices[weaponId]).ToString();
     }
     private void ResetTextOnFailure()
     {
-        playerCashDisplay.text = "Your Domi-Cash: " + currentMoney.ToString();
+        playerCashDisplay.text = "Doominic-Cash: " + currentMoney.ToString();
     }
     private void GetPlayerCash()
     {
@@ -170,7 +170,7 @@ public class ShopManager : MonoBehaviour
         PlayFabClientAPI.GetUserInventory(request, resultCallback =>
         {
             currentMoney = resultCallback.VirtualCurrency["DC"];
-            playerCashDisplay.text = "Your Domi-Cash: " + currentMoney.ToString();
+            playerCashDisplay.text = "Doominic-Cash: " + currentMoney.ToString();
         },
         errorCallback =>
         {

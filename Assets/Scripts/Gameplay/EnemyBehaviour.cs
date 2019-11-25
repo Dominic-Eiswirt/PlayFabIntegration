@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -9,22 +9,39 @@ public class EnemyBehaviour : MonoBehaviour
     private Vector3 target;
     [SerializeField] private int health = 3;
     private float movementSpeed = 10;
-    private const float originalFireRate = 1f;
+    private const float originalFireRate = 1.5f;
     private float fireRate = originalFireRate;
+    public delegate void EnemyEvent();
+    public EnemyEvent OnEnemyDeath;
+    public EnemyEvent OnEnemyAttack;
+    public bool move = true;
+
+    private WaitForSeconds waitDuration = new WaitForSeconds(2f);
+    private bool alive = true;
+
     void Start()
     {
+        fireRate = originalFireRate + Random.Range(-0.25f, 1.75f);
         target = (PlayerInput.instance.gameObject.transform.position - this.transform.position).normalized;
     }
 
     private void Update()
-    {        
-        fireRate -= Time.deltaTime;
-        if(fireRate < 0)
-        {            
-            GameplayManager.instance.SpawnEnemyBullet(this.transform.position);
-            fireRate = originalFireRate;
+    {
+        if (alive)
+        {
+            fireRate -= Time.deltaTime;
+            if (fireRate < 0)
+            {
+                move = false;
+                GameplayManager.instance.SpawnEnemyBullet(this.transform.position);
+                fireRate = originalFireRate + Random.Range(-0.5f, 1.75f);
+                OnEnemyAttack.Invoke();
+            }
+            if (move)
+            {
+                this.transform.position += target * movementSpeed * Time.deltaTime;
+            }
         }
-        this.transform.position += target * movementSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,8 +51,21 @@ public class EnemyBehaviour : MonoBehaviour
         other.gameObject.SetActive(false);
         if(health <= 0)
         {
+            alive = false;
+            GetComponent<BoxCollider>().enabled = false;
+            OnEnemyDeath.Invoke();            
             GameplayManager.instance.coreGameData.score++;
-            Destroy(this.gameObject);
+            StartCoroutine(WaitForDestruction());
         }
+    }
+
+    public void SetIsDemon()
+    {
+        health += 3;
+    }
+    IEnumerator WaitForDestruction()
+    {
+        yield return waitDuration;
+        Destroy(this.gameObject);
     }
 }

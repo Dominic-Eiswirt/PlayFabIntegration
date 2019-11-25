@@ -159,6 +159,7 @@
     <Compile Include="Assets\PlayFabSdk\Shared\Public\PluginContract.cs" />
     <Compile Include="Assets\PlayFabSdk\Shared\Public\PluginContractKey.cs" />
     <Compile Include="Assets\PlayFabSdk\Shared\Public\PluginManager.cs" />
+    <Compile Include="Assets\RandomizeEnemy.cs" />
     <Compile Include="Assets\Scripts\Button Events\ButtonEvents.cs" />
     <Compile Include="Assets\Scripts\Button Events\EmailField.cs" />
     <Compile Include="Assets\Scripts\Button Events\InputFieldOnEndEdit.cs" />

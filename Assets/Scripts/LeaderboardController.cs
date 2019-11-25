@@ -30,10 +30,11 @@ public class LeaderboardController : MonoBehaviour
     private void OnLeaderboardSuccess(GetLeaderboardResult result)
     {
         toggleButton.SetActive(true);
-        loadingText.SetActive(false);
+        loadingText.SetActive(false);        
         foreach (PlayerLeaderboardEntry player in result.Leaderboard)
         {            
             InstantiatePlayerText((player.Position+1).ToString(), player.PlayFabId, player.StatValue.ToString());
+
         }
     }
 
