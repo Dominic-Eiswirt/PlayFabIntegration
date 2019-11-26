@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     private Vector3 target;
     [SerializeField] private int health = 3;
-    private float movementSpeed = 10;
+    private float movementSpeed = 15;
     private const float originalFireRate = 1.5f;
     private float fireRate = originalFireRate;
     public delegate void EnemyEvent();
@@ -61,8 +61,16 @@ public class EnemyBehaviour : MonoBehaviour
         health--;        
         other.gameObject.SetActive(false);
         if(health <= 0)
-        {
+        {               
             alive = false;
+            if(myType == EnemyType.Demon)
+            {
+                AudioCenter.instance.DemonDeath();
+            }
+            else
+            {
+                AudioCenter.instance.HumanDeath();
+            }
             GetComponent<BoxCollider>().enabled = false;
             OnEnemyDeath.Invoke();            
             GameplayManager.instance.coreGameData.score++;
@@ -76,13 +84,16 @@ public class EnemyBehaviour : MonoBehaviour
         if(enemyType == EnemyType.Demon)
         {
             health += 3;
+            movementSpeed *= 1.5f;
         }
         if (enemyType == EnemyType.Gunner)
         {
             health += 2;
+            movementSpeed *= 1.15f;
         }
     }
    
+    
     private IEnumerator WaitForDestruction()
     {
         yield return waitDuration;

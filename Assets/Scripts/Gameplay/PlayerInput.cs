@@ -53,17 +53,6 @@ public class PlayerInput : MonoBehaviour
         {            
             equippedWeapon.Shoot(transform.position);
             weaponCooldown = equippedWeapon.GetWeaponAutoCooldown;
-            // manager.SpawnPlayerBullet(PlayerInput.instance.gameObject.transform.position);
-            // if (CurrentWeaponLoadout.instance.selectedWeapon.myType == WeaponSelectedEnum.Shotgun)
-            // {
-            //
-            //     GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),
-            //                                                                                       Random.Range(-modifier, modifier),
-            //                                                                                             0));
-            //     GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),
-            //                                                                                         Random.Range(-modifier, modifier),
-            //                                                                                             0));
-            // }
         }
         
         weaponCooldown -= Time.deltaTime;

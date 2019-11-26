@@ -17,5 +17,6 @@ public class Pistol : IWeapon
     public void Shoot(Vector3 playerPosition)
     {
         GameplayManager.instance.SpawnPlayerBullet(playerPosition);
+        AudioCenter.instance.PlasmaShotSound();
     }
 }

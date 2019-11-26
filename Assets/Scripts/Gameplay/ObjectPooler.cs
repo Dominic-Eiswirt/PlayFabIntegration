@@ -6,15 +6,20 @@ using UnityEngine;
 public class ObjectPooler
 {
     private List<GameObject> objectList = new List<GameObject>();
+    private GameObject parentPool;
     
+    public ObjectPooler(GameObject parent)
+    {
+        parentPool = parent;
+    }
 
     public void CreatePool(GameObject objectToCreate, int count)
-    {
+    {            
         int originalListCount = objectList.Count;
         for (int i = originalListCount; i < originalListCount + count ; i++)
         {
 
-            objectList.Add(GameObject.Instantiate(objectToCreate));
+            objectList.Add(GameObject.Instantiate(objectToCreate, parentPool.transform));
             objectList[i].SetActive(false);
         }
     }

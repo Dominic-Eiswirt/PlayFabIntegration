@@ -9,12 +9,9 @@ public class PlayerInventory : MonoBehaviour
     [Serializable]
     public struct Weapons
     { 
-        public int shotgunCount;
-        public int pistolCount;
-        public int chainGunCount;
-        public GameObject Pistol;
-        public GameObject Shotgun;
-        public GameObject Chaingun;
+        public GameObject PistolPrefab;
+        public GameObject ShotgunPrefab;
+        public GameObject ChaingunPrefab;
     }
     public Weapons weapons = new Weapons();    
     public List<GameObject> objectsInSpawnOrder = new List<GameObject>();
@@ -26,45 +23,34 @@ public class PlayerInventory : MonoBehaviour
 
     public void SetInventoryPlayFab(GetUserInventoryResult result)
     {
-        int pistolCount = 0;
-        int shotgunCount = 0;
-        int chainGunCount = 0;
         foreach (ItemInstance item in result.Inventory)
         {
-            if(item.ItemId == WeaponSelectedEnum.Pistol.ToString())
+            if(item.ItemId == WeaponEnum.Pistol.ToString())
             {
                 for(int i = 0; i < item.RemainingUses; i++)
                 { 
-                    pistolCount++;
-                    objectsInSpawnOrder.Add(weapons.Pistol);
+                    objectsInSpawnOrder.Add(weapons.PistolPrefab);
                     objectsInSpawnOrder[objectsInSpawnOrder.Count-1].GetComponent<Weapon>().instanceId = item.ItemInstanceId;
                     
                 }
             }
-            if(item.ItemId == WeaponSelectedEnum.Shotgun.ToString())
+            if(item.ItemId == WeaponEnum.Shotgun.ToString())
             {
                 for (int i = 0; i < item.RemainingUses; i++)
                 {
-                    shotgunCount++;
-                    objectsInSpawnOrder.Add(weapons.Shotgun);
+                    objectsInSpawnOrder.Add(weapons.ShotgunPrefab);
                     objectsInSpawnOrder[objectsInSpawnOrder.Count - 1].GetComponent<Weapon>().instanceId = item.ItemInstanceId;
                 }
             }
-            if(item.ItemId == WeaponSelectedEnum.Chaingun.ToString())
+            if(item.ItemId == WeaponEnum.Chaingun.ToString())
             {
                 for (int i = 0; i < item.RemainingUses; i++)
-                {
-                    Debug.Log("in chain");
-                    chainGunCount++;
-                    objectsInSpawnOrder.Add(weapons.Chaingun);
+                {                    
+                    objectsInSpawnOrder.Add(weapons.ChaingunPrefab);
                     objectsInSpawnOrder[objectsInSpawnOrder.Count - 1].GetComponent<Weapon>().instanceId = item.ItemInstanceId;
                 }
             }
         }
-
-        weapons.chainGunCount = chainGunCount;
-        weapons.shotgunCount = shotgunCount;
-        weapons.pistolCount = pistolCount;
         GetComponentInChildren<InventorySpawner>().InstantiateCells();
     }
 

@@ -16,7 +16,7 @@ public static class WeaponIds
     public static int? CompareIdsAndGetIndex(string storeId)
     {        
         int i = 0;
-        foreach(WeaponSelectedEnum e in Enum.GetValues(typeof(WeaponSelectedEnum)))
+        foreach(WeaponEnum e in Enum.GetValues(typeof(WeaponEnum)))
         {
             if(storeId == e.ToString())
             {

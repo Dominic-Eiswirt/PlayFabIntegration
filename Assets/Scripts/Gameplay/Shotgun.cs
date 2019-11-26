@@ -26,5 +26,6 @@ public class Shotgun : IWeapon
         GameplayManager.instance.SpawnPlayerBullet(playerPosition, new Vector3(Random.Range(-modifier, modifier),
                                                                             Random.Range(-modifier, modifier),
                                                                                 0));
+        AudioCenter.instance.PlasmaShotSound();
     }
 }

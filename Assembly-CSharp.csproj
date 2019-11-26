@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioCenter.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSdk\Admin\PlayFabAdminModels.cs" />
@@ -161,13 +162,12 @@
     <Compile Include="Assets\Scripts\Button Events\EmailField.cs" />
     <Compile Include="Assets\Scripts\Button Events\InputFieldOnEndEdit.cs" />
     <Compile Include="Assets\Scripts\Button Events\PasswordField.cs" />
-    <Compile Include="Assets\Scripts\CanvasCameraGet.cs" />
     <Compile Include="Assets\Scripts\CurrentWeaponLoadout.cs" />
-    <Compile Include="Assets\Scripts\FailedToStartGameMessage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Bullet.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Chaingun.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBullet.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\FailedToStartGameMessage.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameplayManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\IBullet.cs" />
     <Compile Include="Assets\Scripts\Gameplay\IWeapon.cs" />
@@ -178,8 +178,9 @@
     <Compile Include="Assets\Scripts\Gameplay\RandomizeEnemyAndAnimator.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shotgun.cs" />
     <Compile Include="Assets\Scripts\LeaderboardController.cs" />
-    <Compile Include="Assets\Scripts\LockInspectorHotkey.cs" />
-    <Compile Include="Assets\Scripts\OutlineColorLerp.cs" />
+    <Compile Include="Assets\Scripts\Misc\CanvasCameraGet.cs" />
+    <Compile Include="Assets\Scripts\Misc\LockInspectorHotkey.cs" />
+    <Compile Include="Assets\Scripts\Misc\OutlineColorLerp.cs" />
     <Compile Include="Assets\Scripts\PlayerHealthDisplay.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerSpriteController.cs" />
@@ -188,14 +189,6 @@
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabArgs.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabLogin.cs" />
     <Compile Include="Assets\Scripts\ShopManager.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\CreateAccountInitialReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\CreateAccountResultSharedReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\InventoryReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\LobbyReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\LoginErrorReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\LoginReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\LoginSuccessReferences.cs" />
-    <Compile Include="Assets\Scripts\StateReferences\StateReferences.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\InventorySpawner.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\InventoryState.cs" />
     <Compile Include="Assets\Scripts\States\InventoryStates\ShopState.cs" />

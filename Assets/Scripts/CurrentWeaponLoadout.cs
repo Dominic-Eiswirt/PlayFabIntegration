@@ -5,7 +5,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
-public enum WeaponSelectedEnum { Pistol, Shotgun, Chaingun }
+public enum WeaponEnum { Pistol, Shotgun, Chaingun }
 
 /// <summary>
 /// This is just a container for storing the weapon that was selected in the inventory. Used because the inventory state will be destroyed 
@@ -84,15 +84,15 @@ public class CurrentWeaponLoadout : MonoBehaviour
 
     public IWeapon GetCurrentWeaponFromLoadout()
     {
-        if (selectedWeapon.myType == WeaponSelectedEnum.Pistol)
+        if (selectedWeapon.myType == WeaponEnum.Pistol)
         {
             return new Pistol();
         }
-        else if (selectedWeapon.myType == WeaponSelectedEnum.Shotgun)
+        else if (selectedWeapon.myType == WeaponEnum.Shotgun)
         {
             return new Shotgun();
         }
-        else if (selectedWeapon.myType == WeaponSelectedEnum.Chaingun)
+        else if (selectedWeapon.myType == WeaponEnum.Chaingun)
         {
             return new Chaingun();
         }

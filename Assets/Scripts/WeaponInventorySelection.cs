@@ -8,7 +8,7 @@ using PlayFab;
 
 public class WeaponInventorySelection : MonoBehaviour
 {
-    public WeaponSelectedEnum myType;
+    public WeaponEnum myType;
     public void OnButtonClick()
     {           
         CurrentWeaponLoadout.instance.CloneWeapon(GetComponentInParent<Weapon>());

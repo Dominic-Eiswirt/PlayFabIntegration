@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public Text weaponPriceText;
     public Text headText;
     [SerializeField] private Image background;
-    public WeaponSelectedEnum myType;
+    public WeaponEnum myType;
     public string instanceId;    
 
     private void Awake()

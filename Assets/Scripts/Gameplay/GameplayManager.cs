@@ -32,7 +32,8 @@ public class GameplayManager : MonoBehaviour
     private float waveTimer = 2;
     private float gameTimer = 30;
 
-
+    private GameObject enemyBulletContainer;
+    private GameObject playerBulletContainer;
 
     private void Awake()
     {
@@ -47,12 +48,15 @@ public class GameplayManager : MonoBehaviour
     }
     void Start()
     {
+        enemyBulletContainer = new GameObject("Enemy Bullet Container");
+        playerBulletContainer = new GameObject("Player Bullet Container");
         Instantiate(playerPrefab);
-        enemyBulletPooler = new ObjectPooler();
+        enemyBulletPooler = new ObjectPooler(enemyBulletContainer);
         enemyBulletPooler.CreatePool(enemyBullet, 25);
-        playerBulletPooler = new ObjectPooler();
-        playerBulletPooler.CreatePool(playerBullet, 10);
+        playerBulletPooler = new ObjectPooler(playerBulletContainer);
+        playerBulletPooler.CreatePool(playerBullet, 25);
         PlayerInput.instance.manager = this;
+        AudioCenter.instance.SetGameActive();
 
     }
     void Update()
@@ -80,6 +84,7 @@ public class GameplayManager : MonoBehaviour
             playerBulletPooler.NukePool();
             Destroy(PlayerInput.instance.gameObject);
             UICenter.instance.SetNewData(coreGameData);
+            AudioCenter.instance.SetGameInactive();
             UICenter.instance.ChangeState(new LobbyState());
         }
     }
