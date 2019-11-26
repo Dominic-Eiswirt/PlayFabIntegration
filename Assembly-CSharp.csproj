@@ -163,6 +163,8 @@
     <Compile Include="Assets\Scripts\Button Events\InputFieldOnEndEdit.cs" />
     <Compile Include="Assets\Scripts\Button Events\PasswordField.cs" />
     <Compile Include="Assets\Scripts\CurrentWeaponLoadout.cs" />
+    <Compile Include="Assets\Scripts\Entity\PlayerEntity.cs" />
+    <Compile Include="Assets\Scripts\Entity\PlayfabEntity.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Bullet.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Chaingun.cs" />
     <Compile Include="Assets\Scripts\Gameplay\EnemyBehaviour.cs" />
@@ -184,7 +186,6 @@
     <Compile Include="Assets\Scripts\PlayerHealthDisplay.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerSpriteController.cs" />
-    <Compile Include="Assets\Scripts\PlayfabEntity.cs" />
     <Compile Include="Assets\Scripts\PlayFabInventory.cs" />
     <Compile Include="Assets\Scripts\PlayfabLobbyXPDisplay.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabArgs.cs" />
