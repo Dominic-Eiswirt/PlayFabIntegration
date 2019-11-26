@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class Weapon : MonoBehaviour, ICloneable
+public class Weapon : MonoBehaviour
 {
     public WeaponCard weaponCardReference;
     public Text weaponPriceText;
     public Text headText;
     [SerializeField] private Image background;
     public WeaponSelectedEnum myType;
-    public string instanceId;
-
+    public string instanceId;    
 
     private void Awake()
     {
@@ -24,9 +23,5 @@ public class Weapon : MonoBehaviour, ICloneable
         }
     }
 
-    public object Clone()
-    {
-        return this;
-    }
 }
 

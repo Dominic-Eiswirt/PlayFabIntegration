@@ -7,9 +7,7 @@ using UnityEngine.UI;
 public class InventorySpawner : MonoBehaviour
 {
     [Range(2, 15)]
-    [SerializeField] private int gridSize;
-    [SerializeField] private GameObject Pistol;
-    [SerializeField] private GameObject Shotgun;    
+    [SerializeField] private int gridSize;        
     private GridLayoutGroup gridLayout;
     private PlayerInventory playerInventory;
     public bool useDynamicGrid = true; //Grid that depends on the amount of the object we are instantiating

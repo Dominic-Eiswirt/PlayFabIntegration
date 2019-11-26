@@ -5,7 +5,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
-public enum WeaponSelectedEnum { Pistol, Shotgun }
+public enum WeaponSelectedEnum { Pistol, Shotgun, Chaingun }
 
 /// <summary>
 /// This is just a container for storing the weapon that was selected in the inventory. Used because the inventory state will be destroyed 
@@ -80,5 +80,26 @@ public class CurrentWeaponLoadout : MonoBehaviour
         weaponClone.weaponCardReference = parentWeapon.weaponCardReference;
         //Debug.Log("Selected weapon is  "+ weaponClone);
         selectedWeapon = weaponClone;
+    }
+
+    public IWeapon GetCurrentWeaponFromLoadout()
+    {
+        if (selectedWeapon.myType == WeaponSelectedEnum.Pistol)
+        {
+            return new Pistol();
+        }
+        else if (selectedWeapon.myType == WeaponSelectedEnum.Shotgun)
+        {
+            return new Shotgun();
+        }
+        else if (selectedWeapon.myType == WeaponSelectedEnum.Chaingun)
+        {
+            return new Chaingun();
+        }
+        else
+        {
+            Debug.LogError("Error with equipping weapon, either enum or IWeapon class doesn't exist");
+            return null;
+        }
     }
 }

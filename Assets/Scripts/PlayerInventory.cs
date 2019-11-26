@@ -11,8 +11,10 @@ public class PlayerInventory : MonoBehaviour
     { 
         public int shotgunCount;
         public int pistolCount;
+        public int chainGunCount;
         public GameObject Pistol;
-        public GameObject Shotgun;              
+        public GameObject Shotgun;
+        public GameObject Chaingun;
     }
     public Weapons weapons = new Weapons();    
     public List<GameObject> objectsInSpawnOrder = new List<GameObject>();
@@ -26,9 +28,10 @@ public class PlayerInventory : MonoBehaviour
     {
         int pistolCount = 0;
         int shotgunCount = 0;
+        int chainGunCount = 0;
         foreach (ItemInstance item in result.Inventory)
         {
-            if(item.ItemId == WeaponIds.pistolID)
+            if(item.ItemId == WeaponSelectedEnum.Pistol.ToString())
             {
                 for(int i = 0; i < item.RemainingUses; i++)
                 { 
@@ -38,7 +41,7 @@ public class PlayerInventory : MonoBehaviour
                     
                 }
             }
-            if(item.ItemId == WeaponIds.shotgunID)
+            if(item.ItemId == WeaponSelectedEnum.Shotgun.ToString())
             {
                 for (int i = 0; i < item.RemainingUses; i++)
                 {
@@ -47,8 +50,19 @@ public class PlayerInventory : MonoBehaviour
                     objectsInSpawnOrder[objectsInSpawnOrder.Count - 1].GetComponent<Weapon>().instanceId = item.ItemInstanceId;
                 }
             }
+            if(item.ItemId == WeaponSelectedEnum.Chaingun.ToString())
+            {
+                for (int i = 0; i < item.RemainingUses; i++)
+                {
+                    Debug.Log("in chain");
+                    chainGunCount++;
+                    objectsInSpawnOrder.Add(weapons.Chaingun);
+                    objectsInSpawnOrder[objectsInSpawnOrder.Count - 1].GetComponent<Weapon>().instanceId = item.ItemInstanceId;
+                }
+            }
         }
 
+        weapons.chainGunCount = chainGunCount;
         weapons.shotgunCount = shotgunCount;
         weapons.pistolCount = pistolCount;
         GetComponentInChildren<InventorySpawner>().InstantiateCells();

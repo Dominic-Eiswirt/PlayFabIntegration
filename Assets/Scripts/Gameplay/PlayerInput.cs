@@ -7,9 +7,9 @@ public class PlayerInput : MonoBehaviour
     public static PlayerInput instance;
     public GameplayManager manager;
     public float speed = 0.5f;
-    public Vector3 mouseTarget;
-    private float modifier = 40;
-    
+    public Vector3 mouseTarget;    
+    private IWeapon equippedWeapon;
+    private float weaponCooldown;
     private void Awake()
     {
         if (instance == null)
@@ -20,6 +20,12 @@ public class PlayerInput : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    private void Start()
+    {
+        equippedWeapon = CurrentWeaponLoadout.instance.GetCurrentWeaponFromLoadout();
+        weaponCooldown = equippedWeapon.GetWeaponAutoCooldown;
     }
 
     private void Update()
@@ -41,21 +47,31 @@ public class PlayerInput : MonoBehaviour
             this.transform.position += Vector3.right * speed;
         }
 
+        mouseTarget = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));     
+
         if (Input.GetMouseButtonDown(0))
         {            
-            mouseTarget = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));            
-            manager.SpawnPlayerBullet(PlayerInput.instance.gameObject.transform.position);
-            if (CurrentWeaponLoadout.instance.selectedWeapon.myType == WeaponSelectedEnum.Shotgun)
-            {
-
-                GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),
-                                                                                                  Random.Range(-modifier, modifier),
-                                                                                                        0));
-                GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),
-                                                                                                    Random.Range(-modifier, modifier),
-                                                                                                        0));
-            }
+            equippedWeapon.Shoot(transform.position);
+            weaponCooldown = equippedWeapon.GetWeaponAutoCooldown;
+            // manager.SpawnPlayerBullet(PlayerInput.instance.gameObject.transform.position);
+            // if (CurrentWeaponLoadout.instance.selectedWeapon.myType == WeaponSelectedEnum.Shotgun)
+            // {
+            //
+            //     GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),
+            //                                                                                       Random.Range(-modifier, modifier),
+            //                                                                                             0));
+            //     GameplayManager.instance.SpawnPlayerBullet(this.transform.position, new Vector3(Random.Range(-modifier, modifier),
+            //                                                                                         Random.Range(-modifier, modifier),
+            //                                                                                             0));
+            // }
         }
+        
+        weaponCooldown -= Time.deltaTime;
+        if(Input.GetMouseButton(0) && weaponCooldown < 0)
+        {            
+            equippedWeapon.Shoot(transform.position);
+            weaponCooldown = equippedWeapon.GetWeaponAutoCooldown;
+        }        
     }
 
 }

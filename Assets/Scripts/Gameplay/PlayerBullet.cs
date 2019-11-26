@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {    
-    private float speed = 45f;
+    private float speed = 85f;
     private Vector3 bulletDirection;    
     void Update()
     {

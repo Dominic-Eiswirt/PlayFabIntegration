@@ -19,7 +19,8 @@ public class ShopManager : MonoBehaviour
     private Weapon[] allWeaponsScript;
     private List<int> weaponPrices = new List<int>();
     private int? indexOfWeapon;
-    int currentMoney;
+    private int currentMoney;
+    private int temporaryMoney; //for simulating pre-purchase display
     void OnEnable()
     {
         if(instance == null)
@@ -107,7 +108,7 @@ public class ShopManager : MonoBehaviour
                 temp = Instantiate(allWeapons[(int)indexOfWeapon], gridChild.transform);
                 tempWeapon = temp.GetComponent<Weapon>();
                 weaponPrices.Add((int)item.VirtualCurrencyPrices["DC"]);
-                tempWeapon.weaponPriceText.text = "Doominic-Cash: " + item.VirtualCurrencyPrices["DC"].ToString();
+                tempWeapon.weaponPriceText.text = "Doominic-Cash: " + item.VirtualCurrencyPrices["DC"].ToString();                
                 tempWeapon.headText.gameObject.SetActive(true);
                 tempWeapon.headText.text = item.ItemId;
                 temp.GetComponent<Button>().enabled = true;
@@ -119,12 +120,13 @@ public class ShopManager : MonoBehaviour
             }
         }
         toggleButton.SetActive(true);
-        loadingText.SetActive(false);
+        loadingText.SetActive(false);        
     }
 
     public void RequestPurchase(int weaponID)
     {
         PrematureTextEdit(weaponID);
+        
         //Gets called when a weapon button is clicked
         PurchaseItemRequest request = new PurchaseItemRequest
         {
@@ -136,7 +138,7 @@ public class ShopManager : MonoBehaviour
         {
             Debug.Log("Success");
             if (ShopManager.instance != null)
-            {
+            {                
                 StartCoroutine(DisplayTextWithColor("Purchase Successful", Color.green));
             }
         },
@@ -160,7 +162,8 @@ public class ShopManager : MonoBehaviour
     }
     private void PrematureTextEdit(int weaponId)
     {
-        playerCashDisplay.text = "Doominic-Cash: " + (currentMoney - weaponPrices[weaponId]).ToString();
+        temporaryMoney -= weaponPrices[weaponId];
+        playerCashDisplay.text = "Doominic-Cash: " + (temporaryMoney).ToString();
     }
     private void ResetTextOnFailure()
     {
@@ -169,15 +172,19 @@ public class ShopManager : MonoBehaviour
     private void GetPlayerCash()
     {
         GetUserInventoryRequest request = new GetUserInventoryRequest();
-
         PlayFabClientAPI.GetUserInventory(request, resultCallback =>
         {
             currentMoney = resultCallback.VirtualCurrency["DC"];
-            playerCashDisplay.text = "Doominic-Cash: " + currentMoney.ToString();
+            temporaryMoney = currentMoney;
+            if (playerCashDisplay != null)
+            {
+                playerCashDisplay.text = "Doominic-Cash: " + currentMoney.ToString();
+            }
         },
         errorCallback =>
         {
             Debug.Log("Error Message: " + errorCallback.ErrorDetails);
         });
+        
     }
 }
