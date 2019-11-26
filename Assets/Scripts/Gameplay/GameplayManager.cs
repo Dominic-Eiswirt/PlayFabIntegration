@@ -85,6 +85,7 @@ public class GameplayManager : MonoBehaviour
             Destroy(PlayerInput.instance.gameObject);
             UICenter.instance.SetNewData(coreGameData);
             AudioCenter.instance.SetGameInactive();
+            CurrentWeaponLoadout.instance.selectedWeapon = null;
             UICenter.instance.ChangeState(new LobbyState());
         }
     }

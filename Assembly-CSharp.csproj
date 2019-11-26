@@ -184,6 +184,7 @@
     <Compile Include="Assets\Scripts\PlayerHealthDisplay.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerSpriteController.cs" />
+    <Compile Include="Assets\Scripts\PlayfabEntity.cs" />
     <Compile Include="Assets\Scripts\PlayFabInventory.cs" />
     <Compile Include="Assets\Scripts\PlayfabLobbyXPDisplay.cs" />
     <Compile Include="Assets\Scripts\PlayFabLogin\PlayFabArgs.cs" />
