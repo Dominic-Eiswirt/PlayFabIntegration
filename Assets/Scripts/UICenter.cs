@@ -8,7 +8,7 @@ using PlayFab.ClientModels;
 
 
 //Serves as a reference container as well as a link for creating/keeping track of current states.
-//Not all states are created here however, some are created in PlayFabLogin, where the result of a request is received
+//Not all states are created here however, some call ChangeState from outside
 public class UICenter : MonoBehaviour
 {
     public static UICenter instance;

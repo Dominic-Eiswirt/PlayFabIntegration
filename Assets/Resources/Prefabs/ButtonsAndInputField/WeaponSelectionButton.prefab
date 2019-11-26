@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5683149404851937759}
   - component: {fileID: 8331274538670732218}
   - component: {fileID: -3382759247410744844}
+  - component: {fileID: 4111856470261342727}
   m_Layer: 0
   m_Name: WeaponSelectionButton
   m_TagString: Untagged
@@ -35,10 +36,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.4978545, y: 0.203984}
-  m_AnchorMax: {x: 0.4978545, y: 0.203984}
-  m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &210016128831715298
 CanvasRenderer:
@@ -146,6 +147,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 0
+--- !u!114 &4111856470261342727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310523206926772689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 3
+  m_AspectRatio: 5.3333335
 --- !u!1 &6679793022798881490
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +196,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.10000038}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -19.9}
+  m_SizeDelta: {x: 0, y: -0.10000038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1679751000883859370
 CanvasRenderer:
@@ -216,9 +231,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 6c952ac7ef09bd44ca4b4a6de5a029ed, type: 3}
     m_FontSize: 24
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 2
+    m_MaxSize: 242
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1

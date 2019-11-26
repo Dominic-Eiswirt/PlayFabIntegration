@@ -135,7 +135,10 @@ public class ShopManager : MonoBehaviour
         PlayFabClientAPI.PurchaseItem(request, resultCallback =>
         {
             Debug.Log("Success");
-            StartCoroutine(DisplayTextWithColor("Purchase Successful", Color.green));            
+            if (ShopManager.instance != null)
+            {
+                StartCoroutine(DisplayTextWithColor("Purchase Successful", Color.green));
+            }
         },
             error =>
         { 

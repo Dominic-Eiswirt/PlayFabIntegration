@@ -15,7 +15,8 @@ public class EnemyBehaviour : MonoBehaviour
     public EnemyEvent OnEnemyDeath;
     public EnemyEvent OnEnemyAttack;
     public bool move = true;
-
+    public EnemyType myType;
+ 
     private WaitForSeconds waitDuration = new WaitForSeconds(2f);
     private bool alive = true;
 
@@ -35,6 +36,16 @@ public class EnemyBehaviour : MonoBehaviour
                 move = false;
                 GameplayManager.instance.SpawnEnemyBullet(this.transform.position);
                 fireRate = originalFireRate + Random.Range(-0.5f, 1.75f);
+                if (myType == EnemyType.Gunner)
+                {
+                    move = false;
+                    GameplayManager.instance.SpawnEnemyBullet(this.transform.position, new Vector3(Random.Range(-5, 5),
+                                                                                                    Random.Range(-5, 5),
+                                                                                                                    0));
+                    GameplayManager.instance.SpawnEnemyBullet(this.transform.position, new Vector3(Random.Range(-5, 5), 
+                                                                                                    Random.Range(-5, 5), 
+                                                                                                                    0));
+                }
                 OnEnemyAttack.Invoke();
             }
             if (move)
@@ -59,11 +70,20 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    public void SetIsDemon()
+    public void SetEnemy(EnemyType enemyType)
     {
-        health += 3;
+        myType = enemyType;
+        if(enemyType == EnemyType.Demon)
+        {
+            health += 3;
+        }
+        if (enemyType == EnemyType.Gunner)
+        {
+            health += 2;
+        }
     }
-    IEnumerator WaitForDestruction()
+   
+    private IEnumerator WaitForDestruction()
     {
         yield return waitDuration;
         Destroy(this.gameObject);

@@ -12,9 +12,8 @@ public class EnemyBullet : Bullet
     {        
         this.transform.position += bulletDirection * speed * Time.deltaTime;
         base.Update();
-        
-
     }
+
     void OnCollisionEnter(Collision other)
     {
         Debug.Log("Collision");        
@@ -24,7 +23,7 @@ public class EnemyBullet : Bullet
 
     public override void Init()
     {
-        bulletDirection = (PlayerInput.instance.gameObject.transform.position - this.transform.position).normalized;
+        bulletDirection = ((PlayerInput.instance.gameObject.transform.position + modifiedTarget) - this.transform.position).normalized;
     }
 
 

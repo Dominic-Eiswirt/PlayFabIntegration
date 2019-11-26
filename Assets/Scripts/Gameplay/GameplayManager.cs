@@ -89,9 +89,9 @@ public class GameplayManager : MonoBehaviour
         playerBulletPooler.SpawnItem(position, modifier);
     }
 
-    public void SpawnEnemyBullet(Vector3 position)
+    public void SpawnEnemyBullet(Vector3 position, Vector3 modifier = default(Vector3))
     {
-        enemyBulletPooler.SpawnItem(position);
+        enemyBulletPooler.SpawnItem(position, modifier);
     }
 
     public void RegisterHit()
