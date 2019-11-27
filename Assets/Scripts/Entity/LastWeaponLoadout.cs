@@ -7,6 +7,10 @@ using PlayFab.ClientModels;
 using PlayFab.DataModels;
 using System;
 using UnityEngine.UI;
+
+/// <summary>
+/// For entity object
+/// </summary>
 public class LastWeaponLoadout : MonoBehaviour
 {    
     private LastGameInfo deserializedLastGameInfo;    

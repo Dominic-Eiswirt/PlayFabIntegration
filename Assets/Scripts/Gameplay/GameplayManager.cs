@@ -96,6 +96,10 @@ public class GameplayManager : MonoBehaviour
                 lastUsedWeaponType = CurrentWeaponLoadout.instance.selectedWeapon.myType,
                 killCount = coreGameData.score
             });
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("Weapon", CurrentWeaponLoadout.instance.selectedWeapon.myType.ToString());
+            data.Add("Kills", coreGameData.score.ToString());            
+            PlayfabUserData.instance.SetUserData(data);
             PlayfabEntity.instance.SetWeaponBeforeGameEnd(jsonString);
             CurrentWeaponLoadout.instance.selectedWeapon = null;
             UICenter.instance.ChangeState(new LobbyState());

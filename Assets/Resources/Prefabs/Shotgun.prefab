@@ -236,8 +236,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125941675994327552, guid: d98021f737b76ee49bab8a513ed33cc2,
-          type: 3}
+      - m_Target: {fileID: 1469134403047840901}
         m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
