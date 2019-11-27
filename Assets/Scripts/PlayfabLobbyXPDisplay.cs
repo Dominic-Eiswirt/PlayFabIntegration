@@ -9,12 +9,13 @@ using PlayFab.Json;
 
 public class PlayfabLobbyXPDisplay : MonoBehaviour
 {   
-    public GameObject[] buttons;
+    [Header("Disables/Enables content when the state is ready loaded or destroyed")]
+    public GameObject[] contentToDisable;
     
 
     private void Start()
     {
-        foreach (GameObject o in buttons)
+        foreach (GameObject o in contentToDisable)
         {
             o.SetActive(false);
         }
@@ -35,7 +36,7 @@ public class PlayfabLobbyXPDisplay : MonoBehaviour
          {
              GetComponent<Text>().text = "";
              Debug.LogError("Error executing cloud script");
-            foreach (GameObject o in buttons)
+            foreach (GameObject o in contentToDisable)
             {
                 o.SetActive(true);
             }
@@ -56,7 +57,7 @@ public class PlayfabLobbyXPDisplay : MonoBehaviour
         {
             GetComponent<Text>().text = "Player XP: " + data.score.ToString();
         }   
-        foreach(GameObject o in buttons)
+        foreach(GameObject o in contentToDisable)
         {             
             o.SetActive(true);
         }

@@ -16,7 +16,6 @@ public class EnemyBullet : Bullet
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Collision");        
         GameplayManager.instance.RegisterHit();
         gameObject.SetActive(false);
     }

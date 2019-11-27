@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     public WeaponCard weaponCardReference;
     public Text weaponPriceText;
     public Text headText;
-    [SerializeField] private Image background;
+    public Image background;
     public WeaponEnum myType;
     public string instanceId;    
 

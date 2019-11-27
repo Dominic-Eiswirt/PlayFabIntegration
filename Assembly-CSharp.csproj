@@ -163,6 +163,8 @@
     <Compile Include="Assets\Scripts\Button Events\InputFieldOnEndEdit.cs" />
     <Compile Include="Assets\Scripts\Button Events\PasswordField.cs" />
     <Compile Include="Assets\Scripts\CurrentWeaponLoadout.cs" />
+    <Compile Include="Assets\Scripts\Entity\LastGameInfo.cs" />
+    <Compile Include="Assets\Scripts\Entity\LastWeaponLoadout.cs" />
     <Compile Include="Assets\Scripts\Entity\PlayerEntity.cs" />
     <Compile Include="Assets\Scripts\Entity\PlayfabEntity.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Bullet.cs" />

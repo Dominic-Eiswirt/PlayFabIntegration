@@ -50,7 +50,7 @@ public class GameplayManager : MonoBehaviour
     {
         enemyBulletContainer = new GameObject("Enemy Bullet Container");
         playerBulletContainer = new GameObject("Player Bullet Container");
-        Instantiate(playerPrefab);
+        Instantiate(playerPrefab, this.transform);
         enemyBulletPooler = new ObjectPooler(enemyBulletContainer);
         enemyBulletPooler.CreatePool(enemyBullet, 25);
         playerBulletPooler = new ObjectPooler(playerBulletContainer);
@@ -58,6 +58,12 @@ public class GameplayManager : MonoBehaviour
         PlayerInput.instance.manager = this;
         AudioCenter.instance.SetGameActive();
 
+        
+        //string jsonString = JsonUtility.ToJson(new LastGameInfo { 
+        //                                        lastUsedWeaponType = CurrentWeaponLoadout.instance.selectedWeapon.myType 
+        //});
+        //PlayfabEntity.instance.SetWeaponBeforeGameEnd(jsonString);
+        
     }
     void Update()
     {
@@ -79,12 +85,18 @@ public class GameplayManager : MonoBehaviour
         }
 
         if (gameTimer <= 0 || playerHealth <= 0)
-        {            
+        {           
+            
             enemyBulletPooler.NukePool();
-            playerBulletPooler.NukePool();
-            Destroy(PlayerInput.instance.gameObject);
+            playerBulletPooler.NukePool();            
             UICenter.instance.SetNewData(coreGameData);
             AudioCenter.instance.SetGameInactive();
+            string jsonString = JsonUtility.ToJson(new LastGameInfo
+            {
+                lastUsedWeaponType = CurrentWeaponLoadout.instance.selectedWeapon.myType,
+                killCount = coreGameData.score
+            });
+            PlayfabEntity.instance.SetWeaponBeforeGameEnd(jsonString);
             CurrentWeaponLoadout.instance.selectedWeapon = null;
             UICenter.instance.ChangeState(new LobbyState());
         }

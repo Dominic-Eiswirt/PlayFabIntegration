@@ -14,11 +14,12 @@ public class UICenter : MonoBehaviour
     public static UICenter instance;
     [Space(5)]
     public UIState currentState;
-    public bool lobbyCheat = false;
-    public bool testInventoryState = true;
     public Canvas canvas;
     public PlayFabLogin playFab;
     public CoreGameData data = new CoreGameData();
+    public delegate void UIEvent();
+    public event UIEvent OnStateChange;
+
 
     private void Awake()
     {
@@ -30,20 +31,13 @@ public class UICenter : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        currentState = new LoginState();
-        currentState.DisplayState();
+        
     }
 
     private void Start()
-    {
-        if (lobbyCheat)
-        {
-            ChangeState(new LobbyState());
-        }
-        if (testInventoryState)
-        {
-            ChangeState(new InventoryState());
-        }
+    {  
+        currentState = new LoginState();
+        currentState.DisplayState();
     }
 
     private void OnEnable()
@@ -58,6 +52,7 @@ public class UICenter : MonoBehaviour
         currentState?.BeforeStateChange();
         currentState = state;
         currentState.DisplayState();
+        OnStateChange?.Invoke();
     }
 
 

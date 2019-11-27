@@ -7,25 +7,51 @@ using PlayFab.AuthenticationModels;
 using PlayFab.DataModels;
 public class PlayfabEntity : MonoBehaviour
 {
+    public static PlayfabEntity instance;
+    public delegate void EntityEvents(ObjectResult s);
+    public event EntityEvents OnReceivedLastWeapon;
     public bool getEntity;
-    void Start()
-    {
-        // if (!getEntity)
-        // {
-        //setEntity
-        PlayFabAuthenticationAPI.GetEntityToken(new GetEntityTokenRequest(), OnEntitySuccess, OnEntityFailure);
-        //  }
-        //  else
-        //  {
 
-        //   }
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        UICenter.instance.OnStateChange += GetEntityToken;
+    }
+    private void OnDisable()
+    {
+        UICenter.instance.OnStateChange -=  GetEntityToken;
+    }
+
+    public void GetEntityToken()
+    {
+        if (PlayFab.PlayFabClientAPI.IsClientLoggedIn() && PlayerEntity.type == "" && PlayerEntity.id == "")
+        {
+            Debug.Log("Player is logged in and has no ID or Type, running entity token to fetch ID and type");
+            PlayFabAuthenticationAPI.GetEntityToken(new GetEntityTokenRequest(), OnEntitySuccess, OnEntityFailure);
+        }
+        else
+        {
+            Debug.Log(string.Format("Not doing anything. Player logged in status is {0}. Player id is: {1}. Player type is: {2}",
+                                                                                    PlayFabClientAPI.IsClientLoggedIn().ToString(),                                                           PlayerEntity.id, 
+                                                                                            PlayerEntity.type));
+        }
     }
 
     private void OnEntitySuccess(GetEntityTokenResponse responseResult)
     {
         PlayerEntity.id = responseResult.Entity.Id;
-        PlayerEntity.type = responseResult.Entity.Type;
-        SetTestEntityOnPlayer();
+        PlayerEntity.type = responseResult.Entity.Type;        
     }
 
     private void OnEntityFailure(PlayFabError error)
@@ -35,20 +61,24 @@ public class PlayfabEntity : MonoBehaviour
         Debug.LogError(error.ErrorDetails);
     }
 
-    private void SetTestEntityOnPlayer()
+    public void SetWeaponBeforeGameEnd(string jsonString)
     {
-        Dictionary<string, object> data = new Dictionary<string, object>()
-        {
-            { "Health", 100 },
-            { "Stamina", 100 },
-        };
+        //Dictionary<string, object> data = new Dictionary<string, object>()
+        //{
+        //    { "weaponCardReference", weaponToWrite.weaponCardReference },
+        //    { "weaponPriceText", weaponToWrite.weaponPriceText },
+        //    { "headText", weaponToWrite.headText },
+        //    { "background", weaponToWrite.background },
+        //    { "myType", weaponToWrite.myType },
+        //    { "instanceId", weaponToWrite.instanceId }
+        //};
 
         List<SetObject> dataList = new List<SetObject>()
         {
             new SetObject()
             {
-                ObjectName = "TestPlayerData",
-                DataObject = data
+                ObjectName = "LastUsedWeapon",
+                DataObject = jsonString
             },
         };
 
@@ -58,18 +88,16 @@ public class PlayfabEntity : MonoBehaviour
             Objects = dataList,
         }, (setResult) =>
         {
-            Debug.Log(setResult.ProfileVersion);
+            RequestLastWeaponInfo();
+            
         },
         (error) =>
         {
             Debug.Log(error.ErrorDetails);
-        });
-
-        Debug.Log("|||||||||||||||||||||||||||||||||||||||||||||||");
-        RequestEntityInfo();
+        });     
     }
 
-    private void RequestEntityInfo()
+    public void RequestLastWeaponInfo()
     {
         GetObjectsRequest request = new GetObjectsRequest
         {
@@ -83,10 +111,10 @@ public class PlayfabEntity : MonoBehaviour
             request,
             result =>
             {
-                Debug.Log(result.Objects["TestPlayerData"].ToJson());
+                OnReceivedLastWeapon?.Invoke(result.Objects["LastUsedWeapon"]);                
+                
+                //Debug.Log(result.Objects["LastUsedWeapon"].ToJson());
             },
             (error) => Debug.Log(error));
-            
-
     }
 }

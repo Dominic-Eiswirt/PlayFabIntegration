@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class PlayerEntity
 {
-    public static string id;
-    public static string type;
+    public static string id = "";
+    public static string type = "";
 }
