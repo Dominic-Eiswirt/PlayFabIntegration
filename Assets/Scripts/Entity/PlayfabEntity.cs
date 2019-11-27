@@ -9,6 +9,8 @@ public class PlayfabEntity : MonoBehaviour
 {
     public static PlayfabEntity instance;
     public delegate void EntityEvents(ObjectResult s);
+    public delegate void NoPlayerInfo();
+    public event NoPlayerInfo OnPlayerIsNewAndHasNoData;
     public event EntityEvents OnReceivedLastWeapon;
     public bool getEntity;
 
@@ -63,16 +65,7 @@ public class PlayfabEntity : MonoBehaviour
 
     public void SetWeaponBeforeGameEnd(string jsonString)
     {
-        //Dictionary<string, object> data = new Dictionary<string, object>()
-        //{
-        //    { "weaponCardReference", weaponToWrite.weaponCardReference },
-        //    { "weaponPriceText", weaponToWrite.weaponPriceText },
-        //    { "headText", weaponToWrite.headText },
-        //    { "background", weaponToWrite.background },
-        //    { "myType", weaponToWrite.myType },
-        //    { "instanceId", weaponToWrite.instanceId }
-        //};
-
+      //This gets called on gamemanager end game. So we immediately call get user data so we receive the info in the lobby
         List<SetObject> dataList = new List<SetObject>()
         {
             new SetObject()
@@ -111,10 +104,19 @@ public class PlayfabEntity : MonoBehaviour
             request,
             result =>
             {
-                OnReceivedLastWeapon?.Invoke(result.Objects["LastUsedWeapon"]);                
-                
+                if (result.Objects.ContainsKey("LastUsedWeapon"))
+                {
+                    OnReceivedLastWeapon?.Invoke(result.Objects["LastUsedWeapon"]);
+                }
+                else
+                {
+                    OnPlayerIsNewAndHasNoData?.Invoke();
+                }
                 //Debug.Log(result.Objects["LastUsedWeapon"].ToJson());
             },
-            (error) => Debug.Log(error));
+            (error) =>
+            {                 
+                Debug.Log(error);
+            });
     }
 }
